@@ -415,25 +415,16 @@ translate_param_cast_msg(M) when erlang:is_atom(M) -> [erlang:atom_to_list(M)].
 %% handle singular messages
 translate_private(Application, Repository, Language, Context, Msg, Data, Reference) ->
 
-%%	?T__LOG(debug, "~n~ntranslate_private", [
-%%		{application, Application},
-%%		{repository, Repository},
-%%		{language, Language},
-%%		{context, Context},
-%%		{msg, Msg},
-%%		{data, Data}
-%%		]),
-
 	TableMsgs = t__utils:ets_table_msgs(Application, Repository),
 	Key = {Language, {Context, Msg}},
-	Msg1 = try
+	try
 			   case ets:lookup(TableMsgs, Key) of
 				   [] ->
 					   TablePot = t__utils:ets_table_pot(Application, Repository),
 					   try
 						   ets:insert(TablePot, {Key, Msg, Reference}),
 						   ets:insert(TableMsgs, {Key, Msg}),
-						   Msg
+						   translate_private_sp_missing(Msg, Data, Application, Repository, Language)
 				   		catch
 					   		Exception:Reason  ->
 					   			?T__LOG(error, "ets:insert Exception!",
@@ -449,9 +440,10 @@ translate_private(Application, Repository, Language, Context, Msg, Data, Referen
 							   		{data, Data},
 							   		{reference, Reference}
 						   		]),
-					   		Msg
+								translate_private_sp_missing(Msg, Data, Application, Repository, Language)
 			   			end;
-				   [{_Key, Value}] -> Value
+				   [{_Key, Value}] ->
+					   translate_private_sp(Value, Data, Application, Repository, Language)
 			   end
 		   catch
 			   Exception1:Reason1  ->
@@ -467,9 +459,19 @@ translate_private(Application, Repository, Language, Context, Msg, Data, Referen
 						   {data, Data},
 						   {reference, Reference}
 					   ]),
-				   Msg
-		   end,
-	translate_private_sp(Msg1, Data, Application, Repository, Language).
+				   translate_private_sp_missing(Msg, Data, Application, Repository, Language)
+	end.
+
+%% @doc Detect and translate single or plural terms when the translation is missing
+%% Single terms
+translate_private_sp_missing([Msg], Data, _Application, _Repository, _Language) ->
+	translate_private_format(Msg, Data);
+%% Plural terms
+translate_private_sp_missing([Msg1, Msg2 |_T], Data = [N|_], _Application, _Repository, _Language) ->
+	case N == 1 of
+		true -> translate_private_format(Msg1, Data);
+		false -> translate_private_format(Msg2, Data)
+	end.
 
 %% @doc Detect and translate single or plural terms
 %% Single terms
@@ -496,5 +498,3 @@ translate_private_format(Msg, Data) when erlang:is_list(Data); erlang:length(Dat
 			Msg
 	end;
 translate_private_format(Msg, _Data) -> Msg.
-
-
