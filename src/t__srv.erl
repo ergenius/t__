@@ -294,7 +294,7 @@ private_handle_terminate(State = #t__srv_state{
 		repositories = Repositories}}|T]}) ->
 	private_delete_repositories(Application, Repositories),
 	private_handle_terminate(State#t__srv_state{configs =T});
-private_handle_terminate(State = #t__srv_state{}) ->
+private_handle_terminate(#t__srv_state{}) ->
 	%% POT update
 	ok.
 

@@ -152,7 +152,7 @@ handle_info(_Info, State) -> {noreply, State}.
 %%
 %% Notice that for any other reason than normal, shutdown, or {shutdown,Term}, the gen_server process is assumed to terminate
 %% because of an error and an error report is issued using error_logger:format/2.
-terminate(_Reason, State) -> ok.
+terminate(_Reason, _State) -> ok.
 
 %% @doc Handle gen_server code change
 %% This function is called by a gen_server process when it is to update its internal state during a release upgrade/downgrade,
