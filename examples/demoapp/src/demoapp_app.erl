@@ -13,6 +13,9 @@
 
 start(_StartType, _StartArgs) ->
 
+    %% Ensure lager is started
+    ok = application:ensure_started(lager),
+
     %% Ensure t__ is started
     ok = application:ensure_started(t__),
 
@@ -35,7 +38,7 @@ start(_StartType, _StartArgs) ->
             #t__repository{
                 name = "default",
                 directory = filename:join([
-                    filename:dirname(filename:dirname(filename:dirname(filename:dirname(filename:dirname(code:which(?MODULE)))))),
+                    filename:dirname(filename:dirname(filename:dirname(filename:dirname(code:which(?MODULE))))),
                     "repositories/default"])
             },
             %% This is an invalid repository demonstrating how resilient t__ is.

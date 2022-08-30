@@ -265,5 +265,12 @@
 	reference = ?T__REFERENCE()})).
 
 %% @doc Log a message
+%% OTP_RELEASE macro was introduced in OTP release 21
+%% when we have the new logger API
+-ifdef(OTP_RELEASE).
+-define(T__LOG(Level, Msg), logger:log(Level, "~p", [Msg])).
+-define(T__LOG(Level, Msg, Args), logger:log(Level, "~p~n~p", [Msg, Args])).
+-else.
 -define(T__LOG(Level, Msg), io:format(user, "~nLOG:~p: ~p~n~n", [Level, Msg])).
 -define(T__LOG(Level, Msg, Args), io:format(user, "~nLOG:~p: ~p~n~p~n~n", [Level, Msg, Args])).
+-endif.
