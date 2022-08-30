@@ -1,5 +1,5 @@
 [
   {demoapp, [
-    {t__, {t__config, "en", true, []}
+    {t__, {t__config, "en", true, []}}
   ]}
 ].

@@ -331,7 +331,7 @@ private_update_application(ApplicationName, [Repository = #t__repository{}|T], A
 		{ok, NewRepository} -> private_update_application(ApplicationName, T, [NewRepository|Acum]);
 		Error ->
 			?T__LOG(error, "Updating application repository failed with error."
-			"Maybe the repository directory was deleted or it is not accesible anymore?",
+			" Repository directory does not exist or it is not accesible.",
 				[
 					{application, ApplicationName},
 					{repository, Repository},

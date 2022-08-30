@@ -34,7 +34,9 @@ start(_StartType, _StartArgs) ->
             %% You MUST always setup at least one "default" repository!
             #t__repository{
                 name = "default",
-                directory = filename:join([filename:dirname(filename:dirname(code:which(?MODULE))), "repositories/default"])
+                directory = filename:join([
+                    filename:dirname(filename:dirname(filename:dirname(filename:dirname(filename:dirname(code:which(?MODULE)))))),
+                    "repositories/default"])
             },
             %% This is an invalid repository demonstrating how resilient t__ is.
             %% This is a nice feature for development phase.

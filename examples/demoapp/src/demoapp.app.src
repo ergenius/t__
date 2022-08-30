@@ -2,7 +2,7 @@
  [{description, "t__ demo application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, {demo_app, []}},
+  {mod, {demoapp_app, []}},
   {applications,
    [kernel,
     stdlib,

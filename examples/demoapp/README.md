@@ -6,4 +6,10 @@ An example OTP application using t__
 Build
 -----
 
-    $ rebar3 compile
+Build a release
+
+    $ rebar3 release
+    
+Run the release (in demoapp/_build/default/rel/demoapp/bin)
+
+    $ ./demoapp console
