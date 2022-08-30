@@ -119,59 +119,97 @@ handle_cast(_Msg, State) -> {noreply, State}.
 %% Handle monitor
 handle_info(translate, State) ->
 
-	%% Translate with the default repository
-	?T__LOG(debug, "Translating with the default repository:"),
-	?T__LOG(debug, ?T__("~4.2f", [3.56])),
-	?T__LOG(debug, ?T__("Privacy Policy")),
-	?T__LOG(debug, ?T__({"web-app/navbar", "About us"})),
-	?T__LOG(debug, ?T__("Project name: ~s", [t__])),
-	?T__LOG(debug, ?T__({"android-app", "Version: ~s"}, ["1.0.0"])),
-	?T__LOG(debug, ?T__({"female", "Her/his name is ~s"}, ["Irina"])),
-	?T__LOG(debug, ?T__({"male", "Her/his name is ~s"}, ["Madalin"])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [0])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [1])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [234])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [0])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [1])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [234])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [0])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [1])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [234])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [4675])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [586])),
-	?T__LOG(debug, ?T__("Multiline\nstring")),
-	?T__LOG(debug, ?T__("\\a \\b \\f \n \\r \t \\v \\' \" \\? \\")),
+	log_multiple_lines([
 
-	%% Translate with the invalid repository
-	?T__LOG(debug, "Translating with the invalid repository:"),
-	?T__LOG(debug, ?T__("~4.2f", [3.56])),
-	?T__LOG(debug, ?T__("Privacy Policy")),
-	?T__LOG(debug, ?T__({"web-app/navbar", "About us"})),
-	?T__LOG(debug, ?T__("Project name: ~s", [t__])),
-	?T__LOG(debug, ?T__({"android-app", "Version: ~s"}, ["1.0.0"])),
-	?T__LOG(debug, ?T__({"female", "Her/his name is ~s"}, ["Irina"])),
-	?T__LOG(debug, ?T__({"male", "Her/his name is ~s"}, ["Madalin"])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [0])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [1])),
-	?T__LOG(debug, ?T__(["~B file", "~B files"], [234])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [0])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [1])),
-	?T__LOG(debug, ?T__({"android-app/search", ["~B result", "~B results"]}, [234])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [0])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [1])),
-	?T__LOG(debug, ?T__({"web-app/search", ["~B result", "~B results"]}, [234])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1])),
-	?T__LOG(debug, ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [4675])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1])),
-	?T__LOG(debug, ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [586])),
-	?T__LOG(debug, ?T__("Multiline\nstring")),
-	?T__LOG(debug, ?T__("\\a \\b \\f \n \\r \t \\v \\' \" \\? \\")),
+		"===========================================",
+		"Translating with the default repository:",
+		"===========================================",
+
+		?T__("~4.2f", [3.56]),
+		?T__("Privacy Policy"),
+		?T__({"web-app/navbar", "About us"}),
+		?T__("Project name: ~s", [t__]),
+		?T__({"android-app", "Version: ~s"}, ["1.0.0"]),
+		?T__({"female", "Her/his name is ~s"}, ["Irina"]),
+		?T__({"male", "Her/his name is ~s"}, ["Madalin"]),
+		?T__(["~B file", "~B files"], [0]),
+		?T__(["~B file", "~B files"], [1]),
+		?T__(["~B file", "~B files"], [234]),
+		?T__({"android-app/search", ["~B result", "~B results"]}, [0]),
+		?T__({"android-app/search", ["~B result", "~B results"]}, [1]),
+		?T__({"android-app/search", ["~B result", "~B results"]}, [234]),
+		?T__({"web-app/search", ["~B result", "~B results"]}, [0]),
+		?T__({"web-app/search", ["~B result", "~B results"]}, [1]),
+		?T__({"web-app/search", ["~B result", "~B results"]}, [234]),
+		?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0]),
+		?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1]),
+		?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [4675]),
+		?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [0]),
+		?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [1]),
+		?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [586]),
+		?T__("Multiline\nstring"),
+		?T__("\\a \\b \\f \n \\r \t \\v \\' \" \\? \\"),
+
+		"===========================================",
+		"Translating with the invalid repository:",
+		"===========================================",
+
+		?T__({"invalid", {"~4.2f"}}, [3.56]),
+		?T__({"invalid", {"Privacy Policy"}}),
+		?T__({"invalid", {{"web-app/navbar", "About us"}}}),
+		?T__({"invalid", {"Project name: ~s"}}, [t__]),
+		?T__({"invalid", {{"android-app", "Version: ~s"}}}, ["1.0.0"]),
+		?T__({"invalid", {{"female", "Her/his name is ~s"}}}, ["Irina"]),
+		?T__({"invalid", {{"male", "Her/his name is ~s"}}}, ["Madalin"]),
+		?T__({"invalid", {["~B file", "~B files"]}}, [0]),
+		?T__({"invalid", {["~B file", "~B files"]}}, [1]),
+		?T__({"invalid", {["~B file", "~B files"]}}, [234]),
+		?T__({"invalid", {{"android-app/search", ["~B result", "~B results"]}}}, [0]),
+		?T__({"invalid", {{"android-app/search", ["~B result", "~B results"]}}}, [1]),
+		?T__({"invalid", {{"android-app/search", ["~B result", "~B results"]}}}, [234]),
+		?T__({"invalid", {{"web-app/search", ["~B result", "~B results"]}}}, [0]),
+		?T__({"invalid", {{"web-app/search", ["~B result", "~B results"]}}}, [1]),
+		?T__({"invalid", {{"web-app/search", ["~B result", "~B results"]}}}, [234]),
+		?T__({"invalid", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [0]),
+		?T__({"invalid", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [1]),
+		?T__({"invalid", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [4675]),
+		?T__({"invalid", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [0]),
+		?T__({"invalid", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [1]),
+		?T__({"invalid", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [586]),
+		?T__({"invalid", {"Multiline\nstring"}}),
+		?T__({"invalid", {"\\a \\b \\f \n \\r \t \\v \\' \" \\? \\"}}),
+
+		"===========================================",
+		"Translating with repository and language:",
+		"===========================================",
+
+		?T__({"default", "en", {"~4.2f"}}, [3.56]),
+		?T__({"default", "en", {"Privacy Policy"}}),
+		?T__({"default", "en", {{"web-app/navbar", "About us"}}}),
+		?T__({"default", "en", {"Project name: ~s"}}, [t__]),
+		?T__({"default", "en", {{"android-app", "Version: ~s"}}}, ["1.0.0"]),
+		?T__({"default", "en", {{"female", "Her/his name is ~s"}}}, ["Irina"]),
+		?T__({"default", "en", {{"male", "Her/his name is ~s"}}}, ["Madalin"]),
+		?T__({"default", "en", {["~B file", "~B files"]}}, [0]),
+		?T__({"default", "en", {["~B file", "~B files"]}}, [1]),
+		?T__({"default", "en", {["~B file", "~B files"]}}, [234]),
+		?T__({"default", "en", {{"android-app/search", ["~B result", "~B results"]}}}, [0]),
+		?T__({"default", "en", {{"android-app/search", ["~B result", "~B results"]}}}, [1]),
+		?T__({"default", "en", {{"android-app/search", ["~B result", "~B results"]}}}, [234]),
+		?T__({"default", "en", {{"web-app/search", ["~B result", "~B results"]}}}, [0]),
+		?T__({"default", "en", {{"web-app/search", ["~B result", "~B results"]}}}, [1]),
+		?T__({"default", "en", {{"web-app/search", ["~B result", "~B results"]}}}, [234]),
+		?T__({"default", "en", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [0]),
+		?T__({"default", "en", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [1]),
+		?T__({"default", "en", {{"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [4675]),
+		?T__({"default", "en", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [0]),
+		?T__({"default", "en", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [1]),
+		?T__({"default", "en", {{"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}}, [586]),
+		?T__({"default", "en", {"Multiline\nstring"}}),
+		?T__({"default", "en", {"\\a \\b \\f \n \\r \t \\v \\' \" \\? \\"}})
+
+
+	]),
 
 	%% Keep the "timer" alive: call us again later to translate more
 	erlang:send_after(State#demoapp_srv_state.timer_interval, self(), translate),
@@ -222,3 +260,13 @@ terminate(_Reason, _State) -> ok.
 %% If successful, the function must return the updated internal state.
 %% If the function returns {error,Reason}, the ongoing upgrade fails and rolls back to the old release.
 code_change(_OldVsn, State, _Extra) -> {ok, State}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% log multiple lines
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+log_multiple_lines(L) -> log_multiple_lines(L, []).
+log_multiple_lines([H|T], Acum) ->
+	log_multiple_lines(T, [Acum, H, "\n"]);
+log_multiple_lines(_, Acum) ->
+	?T__LOG(debug, lists:flatten(Acum)).
