@@ -51,7 +51,7 @@ You can use binaries and atoms, however it is not recommended.
 
 ```erlang
 ?T__(<<"Erlang is user-friendly, it’s just picky about its friends!">>).
-?T__('Why can't you trust atoms? Because they make up everything!').
+?T__('Why can\'t you trust atoms? Because they make up everything!').
 ```
 
 #### Singular with context
@@ -91,7 +91,7 @@ Repository can be combined with context also.
 #### Singular terms with interpolation
 
 ```erlang
-?T__("$~2f", [3.56]).
+?T__("~4.2f", [3.56]).
 ```
 
 #### Context for gramatical gender with interpolation
