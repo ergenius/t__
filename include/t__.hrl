@@ -268,9 +268,9 @@
 %% OTP_RELEASE macro was introduced in OTP release 21
 %% when we have the new logger API
 -ifdef(OTP_RELEASE).
--define(T__LOG(Level, Msg), logger:log(Level, "~p", [Msg])).
--define(T__LOG(Level, Msg, Args), logger:log(Level, "~p~n~p", [Msg, Args])).
+-define(T__LOG(Level, Msg), logger:log(Level, "~s", [Msg])).
+-define(T__LOG(Level, Msg, Args), logger:log(Level, "~s~n~p", [Msg, Args])).
 -else.
--define(T__LOG(Level, Msg), io:format(user, "~nLOG:~p: ~p~n~n", [Level, Msg])).
--define(T__LOG(Level, Msg, Args), io:format(user, "~nLOG:~p: ~p~n~p~n~n", [Level, Msg, Args])).
+-define(T__LOG(Level, Msg), io:format(user, "~nLOG:~p: ~s~n~n", [Level, Msg])).
+-define(T__LOG(Level, Msg, Args), io:format(user, "~nLOG:~p: ~s~n~p~n~n", [Level, Msg, Args])).
 -endif.
