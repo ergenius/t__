@@ -32,12 +32,42 @@ Erlang gettext translation application
 | 5   | Diffrent language sources | YES: using application 'repositories' | YES: using diffrent languages servers |
 | 6   | Developer mode/monitoring PO file changes | YES: automatically detecting PO changes | NO: requires manual reloading of the PO files |
 | 7   | Cache | YES: ETS reads/writes on the calling process (faster) | YES: ETS reads/writes inside the translation gen_server |
-| 8   | Parser passed validating Gettext PO samples database | YES | NO |
 
 ## Limitations
 - Gettext plural-forms formulas are hardcoded using a database. Work is underway to bypass this limitation and provide a full interpretor of any arbitrary gettext C formula.
 
-## Examples:
+## Examples
+
+### Set/get the calling process language
+
+#### Set the language
+
+It is higly recommended to set the calling process language in order to avoid specifying the language for each ?T__ macro call.
+The specified language will be used by all T__ macros and functions for the current process if no explicit language is specified as a macro or function parameter.
+
+```erlang
+?T__LANGUAGE("en").
+?T__LANGUAGE("en_GB").
+?T__LANGUAGE("ro").
+```
+
+#### Get the language
+
+Get the calling process language.
+
+When you properly setup the language for the process, the expected time complexity for the current implementation
+of this macro is O(1) and the worst case time complexity is O(N), where N is the number of items in the process dictionary.
+
+The function will perform the following steps in order to determine the default language:
+- call erlang:get(t__language)
+- call application:get_env(t__language)
+- call application:get_env(t__, t__language)
+- if no t__language environment key was set for both the current application or the t__ application
+we return t__ default language defined in t__.hrl file (wich is "en").
+
+```erlang
+Language = ?T__LANGUAGE().
+```
 
 ### T__ macro examples
 
@@ -91,7 +121,7 @@ Repository can be combined with context also.
 #### Singular terms with interpolation
 
 ```erlang
-?T__("~4.2f", [3.56]).
+?T__("~4.2f", [3.56]). 
 ```
 
 #### Context for gramatical gender with interpolation
