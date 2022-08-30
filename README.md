@@ -23,15 +23,15 @@ Erlang gettext translation application
 
 ### Quick comparison with Erlang Gettext
 
-| #   | | t__                  | gettext        |
-|-----| --- |------------------|----------------|
-| 1   | Single macro that handles everything | YES: T__ | NO: TXT & TXT2 |
+| #   | | t__ | gettext |
+|-----| --- |-----|----|
+| 1   | Single macro that handles everything | YES: T__| NO: TXT & TXT2 |
 | 2   | gettext contexts | YES | NO |
 | 3   | gettext plural terms | YES: supports gettext plural formulas for languages with more than 2 plural forms | NO |
 | 4   | Separate configurations for each application started at the same node | YES | NO |
 | 5   | Diffrent language sources | YES: using application 'repositories' | YES: using diffrent languages servers |
-| 6   | Developer mode/monitoring PO file changes | YES - automatically detecting PO changes | NO - requires manual reloading of the PO files |
-| 7   | Cache | YES - ETS reads/writes on the calling process (faster) | YES - ETS reads/writes inside the translation gen_server |
+| 6   | Developer mode/monitoring PO file changes | YES: automatically detecting PO changes | NO: requires manual reloading of the PO files |
+| 7   | Cache | YES: ETS reads/writes on the calling process (faster) | YES: ETS reads/writes inside the translation gen_server |
 | 8   | Parser passed validating Gettext PO samples database | YES | NO |
 
 ## Limitations
