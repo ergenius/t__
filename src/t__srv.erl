@@ -241,7 +241,7 @@ private_handle_config_set(Application, Config = #t__config{}, State = #t__srv_st
 	DeleteStateConfigs = DeleteState#t__srv_state.configs,
 	{ok, private_state_on_change(private_update_applications(DeleteState#t__srv_state{
 		configs = [{Application, Config} | DeleteStateConfigs]
-	})), infinity}.
+	}))}.
 
 %%=============================================================
 %% private_handle_config_delete
