@@ -117,7 +117,7 @@ handle_cast(_Msg, State) -> {noreply, State}.
 %% For a description of the other arguments and possible return values, see Module:handle_call/3.
 
 %% Handle monitor
-handle_info(monitor, State) ->
+handle_info(translate, State) ->
 
 	%% Translate with the default repository
 	?T__LOG(debug, "Translating with the default repository:"),

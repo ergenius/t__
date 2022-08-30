@@ -7,7 +7,6 @@
    [kernel,
     stdlib,
     sasl,
-    lager,
     t__
    ]},
   {env,[]},

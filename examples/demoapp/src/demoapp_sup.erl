@@ -13,23 +13,13 @@
 
 -define(SERVER, ?MODULE).
 
-start_link() ->
-    supervisor:start_link({local, ?SERVER}, ?MODULE, []).
+start_link() -> supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
-%% sup_flags() = #{strategy => strategy(),         % optional
-%%                 intensity => non_neg_integer(), % optional
-%%                 period => pos_integer()}        % optional
-%% child_spec() = #{id => child_id(),       % mandatory
-%%                  start => mfargs(),      % mandatory
-%%                  restart => restart(),   % optional
-%%                  shutdown => shutdown(), % optional
-%%                  type => worker(),       % optional
-%%                  modules => modules()}   % optional
-init([]) ->
-    SupFlags = #{strategy => one_for_all,
-                 intensity => 0,
-                 period => 1},
-    ChildSpecs = [],
-    {ok, {SupFlags, ChildSpecs}}.
+init(Args) ->
 
-%% internal functions
+    %% We use legacy specs for now to remain compatible with older erlang versions we still want to support
+    %% Add children specifications to the supervisor
+    ChildSpecs = [{{local, demoapp_srv}, {demoapp_srv, start_link, [Args]}, permanent, 10000, worker, [demoapp_srv]}],
+
+    %% Returns supervisor flags and child specifications
+    {ok, {{one_for_one, 1, 5}, ChildSpecs}}.

@@ -257,7 +257,7 @@ private_handle_config_delete(Application, State = #t__srv_state{
 		} ->
 			private_handle_config_delete_repositories(Repositories, Application),
 			NewConfigs = proplists:delete(Application, Configs),
-			application:unset_env(Application, t__config),
+			application:unset_env(Application, t__),
 			{ok, private_state_on_change(State#t__srv_state{configs = NewConfigs})};
 		_ ->
 			{{error, not_found}, State}
@@ -369,7 +369,7 @@ private_state_on_change(State = #t__srv_state{configs = Configs, timer_ref = Tim
 					  %% Nothing left to monitor, stop existing timer
 					  {false, _} -> erlang:cancel_timer(TimerRef, [{async, true}]), undefined
 				  end,
-	?T__LOG(debug, "t__srv state changed", [State#t__srv_state{dev_count = NewDevCount, timer_ref = NewTimerRef}]),
+	%%?T__LOG(debug, "t__srv state changed", [State#t__srv_state{dev_count = NewDevCount, timer_ref = NewTimerRef}]),
 	State#t__srv_state{dev_count = NewDevCount, timer_ref = NewTimerRef}.
 
 %% @doc Count the dev in configs proplist

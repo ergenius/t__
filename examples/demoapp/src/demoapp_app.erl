@@ -13,9 +13,6 @@
 
 start(_StartType, _StartArgs) ->
 
-    %% Ensure lager is started
-    ok = application:ensure_started(lager),
-
     %% Ensure t__ is started
     ok = application:ensure_started(t__),
 
