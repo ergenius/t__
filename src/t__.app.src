@@ -1,0 +1,15 @@
+{application, t__,
+ [{description, "Erlang gettext Translation"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [kernel, stdlib, sasl]},
+  {mod, {t___app, []}},
+  {env,[]},
+  {modules, [
+   t__sup,
+   t__srv
+  ]},
+  {maintainers, ["Madalin Grigore-Enescu <github@ergenius.com>"]},
+  {licenses, ["MIT"]},
+  {links, [{"Github", "https://github.com/ergenius/t__"}]}
+ ]}.

@@ -1,0 +1,99 @@
+# This is a translator comment
+msgid ""
+msgstr ""
+"Project-Id-Version: gettext-po-samples 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/ergenius/gettext-po-samples\n"
+"POT-Creation-Date: 2022-08-25 1:00\n"
+"PO-Revision-Date: 2022-08-29 13:37+0000\n"
+"Last-Translator: Madalin Grigore-Enescu\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: English\n"
+
+#. Singular entry
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+#. Singular entry with context
+msgctxt "web-app/navbar"
+msgid "About us"
+msgstr "About us"
+
+#. Singular entry with interpolation
+#, erlang-format
+msgid "Project name: ~s"
+msgstr "Project name: ~s"
+
+#. Singular entry with context and interpolation
+#, erlang-format
+msgctxt "android-app"
+msgid "Version: ~s"
+msgstr "Version: ~s"
+
+#. Grammatical gender based on context combined with interpolation
+#, erlang-format
+msgctxt "female"
+msgid "Her name is ~s"
+msgstr "Her name is ~s"
+
+#. Grammatical gender based on context combined with interpolation
+#, erlang-format
+msgctxt "male"
+msgid "His name is ~s"
+msgstr "His name is ~s"
+
+#. Plural entry with interpolation
+#, erlang-format
+msgid "~B file"
+msgid_plural "~B files"
+msgstr[0] "~B file"
+msgstr[1] "~B files"
+
+#. Plural entry with context and interpolation
+#, erlang-format
+msgctxt "android-app/search"
+msgid "~B result"
+msgid_plural "~B results"
+msgstr[0] "~B result"
+msgstr[1] "~B results"
+
+#. Plural entry with context and interpolation
+#, erlang-format
+msgctxt "web-app/search"
+msgid "~B result"
+msgid_plural "~B results"
+msgstr[0] "~B result"
+msgstr[1] "~B results"
+
+#. Plural entry with context used for grammatical gender and interpolation
+#, erlang-format
+msgctxt "female"
+msgid "~B file belongs to her"
+msgid_plural "~B files belong to her"
+msgstr[0] "~B file belongs to her"
+msgstr[1] "~B files belong to her"
+
+#. Plural entry with context used for grammatical gender and interpolation
+#, erlang-format
+msgctxt "male"
+msgid "~B file belongs to him"
+msgid_plural "~B files belong to him"
+msgstr[0] "~B file belongs to him"
+msgstr[1] "~B files belong to him"
+
+#. Singular entry demonstrating multiline strings.
+msgid "Multiline\n"
+"string"
+msgstr "T:Multiline\n"
+"string"
+
+#. Singular entry demonstrating multiline strings and escape sequences
+msgid "\\a \\b \\f \n"
+" \\r \t \\v \\' \" \\? \\"
+msgstr "T:\\a \\b \\f \n"
+" \\r \t \\v \\' \" \\? \\"
+
+   
