@@ -39,10 +39,110 @@ Erlang gettext translation application
 
 ## Examples:
 
-```erlang
-```
+### T__ macro examples
+
+#### Singular terms
 
 ```erlang
+?T__("I have a joke about Erlang, but it requires a prologue.").
+```
+
+You can use binaries and atoms, however it is not recommended.
+
+```erlang
+?T__(<<"Erlang is user-friendly, it’s just picky about its friends!">>).
+?T__('Why can't you trust atoms? Because they make up everything!').
+```
+
+#### Singular with context
+
+Context is useful for the translators to distinguish in between identical strings.
+
+```erlang
+?T__({"menu", "Save"}).
+?T__({"menu", "Quit"}).
+?T__({"button", "Save"}).
+?T__({"button", "Cancel"}).
+```
+
+Context can also be used to create proper translations based on grammatical gender.
+
+```erlang
+?T__({"female", "The cat belong to him/her"}).
+?T__({"male", "The cat belong to him/her"}).
+```
+
+#### Singular with repository
+
+Repositories are used to have different translations sources directories for the same application.
+For example let's assume your application has many HTML templates, each with his own translation directory.
+
+```erlang
+?T__({"template1", {"Simple term from repository template1"}}).
+?T__({"template2", {"Simple term from repository template2"}}).
+```
+
+Repository can be combined with context also.
+
+```erlang
+?T__({"template1", {"menu", "Save"}}).
+```
+
+#### Singular terms with interpolation
+
+```erlang
+?T__("$~2f", [3.56]).
+```
+
+#### Context for gramatical gender with interpolation
+
+Context can also be used to create the proper translation based on grammatical gender combined with interpolation:
+
+```erlang
+?T__({"female", "Her/his name is ~s"}, ["Marry"]).
+?T__({"male", "Her/his name is ~s"}, ["John"]).
+```
+
+#### Plural terms with interpolation:
+
+```erlang
+?T__(["~B user", "~B users"], [3]).
+```
+
+#### Plural terms with context and interpolation
+
+```erlang
+?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3]).
+?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3]).
+```
+
+#### Plural terms with context, interpolation and repositories
+
+```erlang
+?T__({"template1", {"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3]).
+?T__({"template1", {"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3]).
+```
+
+#### Translate using #t__p{} record
+
+You can also specify everything using the #t__p{} record as a single parameter to the T__ macro.
+This is actually the performance wise way of doing it. You will save some extra functions calls necessary
+to understand your tuples. All #t__p{} fields except msg are optional.
+
+```erlang
+?T__(#t__p{msg = "Hello world"}).
+?T__(#t__p{msg = "Her name is ~s", data = ["Marry"]}).
+?T__(#t__p{language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
+?T__(#t__p{repository = "module1", language = "ro", context = "male", msg = "Her/his name is ~s", data = ["John"]}).
+?T__(#t__p{application=myapp, repository = "module1", language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
+```
+
+#### Macro with all possible parameters separated
+
+For your convenience a macro also exists with all possible parameters:
+
+```erlang
+?T__(Application, Repository, Language, Context, Msg, Data).
 ```
 
 ## Project roadmap

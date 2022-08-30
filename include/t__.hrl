@@ -170,60 +170,59 @@
 %% for the application to which the calling process belongs to.
 %%
 %% Singular terms:
-%% T__("I have a joke about Erlang, but it requires a prologue.")
+%% ?T__("I have a joke about Erlang, but it requires a prologue.")
 %% You can use binaries and atoms, however it is not recommended.
-%% T__(<<"Erlang is user-friendly, it’s just picky about its friends!">>)
-%% T__('Why can't you trust atoms? Because they make up everything!')
+%% ?T__(<<"Erlang is user-friendly, it’s just picky about its friends!">>)
+%% ?T__('Why can't you trust atoms? Because they make up everything!')
 %%
 %% Singular with context:
 %% Context is useful for the translators to distinguish in between identical strings.
-%% T__({"menu", "Save"})
-%% T__({"menu", "Quit"})
-%% T__({"button", "Save"})
-%% T__({"button", "Cancel"})
-%% Context can also be used to create proper translations based on gramatical gender.
-%% T__({"female", "The cat belong to her"})
-%% T__({"male", "The cat belong to him"})
+%% ?T__({"menu", "Save"})
+%% ?T__({"menu", "Quit"})
+%% ?T__({"button", "Save"})
+%% ?T__({"button", "Cancel"})
+%% Context can also be used to create proper translations based on grammatical gender.
+%% ?T__({"female", "The cat belong to him/her"})
+%% ?T__({"male", "The cat belong to him/her"})
 %%
 %% Singular with repository:
-%% Repositories are used to have diffrent translations sources directories for the same application. 
-%% For example let's asume your application has many diffrent HTML templates,
+%% Repositories are used to have different translations sources directories for the same application.
+%% For example let's assume your application has many different HTML templates,
 %% each with his own translation directory.
-%% T__({"template1", {"Simple term from repository template1"}})
-%% T__({"template2", {"Simple term from repository template2"}})
+%% ?T__({"template1", {"Simple term from repository template1"}})
+%% ?T__({"template2", {"Simple term from repository template2"}})
 %% Repository can be combined with context also.
-%% T__({"template1", {"menu", "Save"}})
+%% ?T__({"template1", {"menu", "Save"}})
 %% 
 %% Singular terms with interpolation:
-%% TP__("$~2f", [3.56])
+%% ?T__("$~2f", [3.56])
 %%
 %% Context can also be used to create the proper translation based on grammatical gender combined with interpolation:
-%% https://stackoverflow.com/questions/6143547/handling-grammatical-gender-with-gettext/20547893#comment129540056_20547893
-%% T__({"female", "Her/his name is ~s"}, ["Marry"])
-%% T__({"male", "Her/his name is ~s"}, ["John"])
+%% ?T__({"female", "Her/his name is ~s"}, ["Marry"])
+%% ?T__({"male", "Her/his name is ~s"}, ["John"])
 %%
 %% Plural terms with interpolation:
-%% T__(["~B user", "~B users"], [3])
+%% ?T__(["~B user", "~B users"], [3])
 %%
 %% Plural terms with context and interpolation:
-%% T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
-%% T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
+%% ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
+%% ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
 %%
 %% Plural terms with context, interpolation and repositories:
-%% T__({"template1", {"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
-%% T__({"template1", {"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
+%% ?T__({"template1", {"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
+%% ?T__({"template1", {"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
 %%
 %% You can also specify everything using the #t__p{} record as a single parameter to the T__ macro.
-%% This is actually the performance wise way of doing it. You will save some extra checks done
-%% to understand your touples. All #t__p{} fields except msg are optional.
-%% T__(#t__p{msg = "Hello world"}).
-%% T__(#t__p{msg = "Her name is ~s", data = ["Marry"]}).
-%% T__(#t__p{language = "ro_RO", context = "female", msg = "Her name is ~s", data = ["Marry"]}).
-%% T__(#t__p{repository = "module1", language = "ro_RO", context = "female", msg = "Her name is ~s", data = ["Marry"]}).
-%% T__(#t__p{application=myapp, repository = "module1", language = "ro_RO", context = "female", msg = "Her name is ~s", data = ["Marry"]}).
+%% This is actually the performance wise way of doing it. You will save some extra functions calls necessary
+%% to understand your tuples. All #t__p{} fields except msg are optional.
+%% ?T__(#t__p{msg = "Hello world"}).
+%% ?T__(#t__p{msg = "Her name is ~s", data = ["Marry"]}).
+%% ?T__(#t__p{language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
+%% ?T__(#t__p{repository = "module1", language = "ro", context = "male", msg = "Her/his name is ~s", data = ["John"]}).
+%% ?T__(#t__p{application=myapp, repository = "module1", language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
 %%
 %% For your convenience a macro also exists with all possible parameters:
-%% T__(Application, Repository, Language, Context, Msg, Data).
+%% ?T__(Application, Repository, Language, Context, Msg, Data).
 %%
 %% As you probably noticed in the examples above, interpolation is using Erlang format control sequences 
 %% (io:format style parameter).
@@ -245,6 +244,7 @@
 %% containing each variable!
 %%
 %% What is gettext plural formula?
+%%
 %% The information about the plural form selection is stored in the header entry of the PO file 
 %% (the one with the empty msgid string). The plural form information for english language looks like this:
 %% Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;
