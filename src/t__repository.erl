@@ -40,7 +40,7 @@
 update(Application, Repository = #t__repository{name = RepositoryName}) ->
     case update_check(Repository) of
         {true, NewFileList} ->
-            ?T__LOG(debug, "Repository changed. Updating ETS tables.", [{application, Application}, {repository, Repository}]),
+            ?T__LOG(debug, "Repository changed. Updating ETS tables.", [{application, Application}, {repository, RepositoryName}]),
             update_force(Application, Repository, NewFileList);
         false -> {ok, Repository};
         Error ->

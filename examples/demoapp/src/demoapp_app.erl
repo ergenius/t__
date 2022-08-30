@@ -46,7 +46,7 @@ start(_StartType, _StartArgs) ->
             %% and the repository will be available to use.
             #t__repository{
                 name = "invalid",
-                directory = "/t__/invalid-repository-that-does-not-exist-48945700dbguasczx"
+                directory = "/home/madalin/invalid-repository-that-does-not-exist-48945700dbguasczx"
             }
         ]
     }),
