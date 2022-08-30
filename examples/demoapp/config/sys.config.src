@@ -1,0 +1,5 @@
+[
+  {demoapp, [
+    {t__, {t__config, "en", true, []}
+  ]}
+].

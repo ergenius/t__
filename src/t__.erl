@@ -123,7 +123,7 @@ config_get(Application) ->
 
 %% @doc Returns the value of configuration t__config for Application
 config_get_environment(Application) ->
-	case application:get_env(Application, t__config) of
+	case application:get_env(Application, t__) of
 		{ok, Config = #t__config{}} -> {ok, Config};
 		{ok, _InvalidConfig} ->
 			?T__LOG(emergency, "The value of configuration t__config for application is invalid!",
@@ -229,7 +229,7 @@ config_delete_cast(Application) -> t__srv:config_delete_cast(Application).
 %% @doc Translate a singular or plural term, with or without repository, language and context
 %% This is the main translate function that does everything.
 %% using #t__p
-translate(P = #t__p{
+translate(#t__p{
 	application = Application,
 	repository = Repository,
 	language = Language,
@@ -278,7 +278,7 @@ translate(P, Data) -> translate(P, Data, undefined).
 translate(P = #t__p{}, Data, Reference) ->
 	translate(P#t__p{data = Data, reference = Reference});
 %% With proplist
-translate(P = [{K, V} | T], Data, Reference) ->
+translate(P = [{_K, _V} | _T], Data, Reference) ->
 	translate(translate_param_proplists_to_p(P, Data, Reference));
 %% With repository and term
 translate({Repository, {Term}}, Data, Reference) ->

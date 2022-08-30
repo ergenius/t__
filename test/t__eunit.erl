@@ -65,7 +65,7 @@ application_test_() ->
 			},
 
 			%% Set the application environment
-			ok = application:set_env(t__, t__config, Config),
+			ok = application:set_env(t__, t__, Config),
 
 			%% Start application for the test
 			ok = application:ensure_started(sasl),

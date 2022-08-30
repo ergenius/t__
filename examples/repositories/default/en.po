@@ -36,13 +36,13 @@ msgstr "Version: ~s"
 #. Grammatical gender based on context combined with interpolation
 #, erlang-format
 msgctxt "female"
-msgid "Her name is ~s"
+msgid "Her/his name is ~s"
 msgstr "Her name is ~s"
 
 #. Grammatical gender based on context combined with interpolation
 #, erlang-format
 msgctxt "male"
-msgid "His name is ~s"
+msgid "Her/his name is ~s"
 msgstr "His name is ~s"
 
 #. Plural entry with interpolation
@@ -71,16 +71,16 @@ msgstr[1] "~B results"
 #. Plural entry with context used for grammatical gender and interpolation
 #, erlang-format
 msgctxt "female"
-msgid "~B file belongs to her"
-msgid_plural "~B files belong to her"
+msgid "~B file belongs to her/him"
+msgid_plural "~B files belong to her/him"
 msgstr[0] "~B file belongs to her"
 msgstr[1] "~B files belong to her"
 
 #. Plural entry with context used for grammatical gender and interpolation
 #, erlang-format
 msgctxt "male"
-msgid "~B file belongs to him"
-msgid_plural "~B files belong to him"
+msgid "~B file belongs to her/him"
+msgid_plural "~B files belong to her/him"
 msgstr[0] "~B file belongs to him"
 msgstr[1] "~B files belong to him"
 

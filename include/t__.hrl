@@ -147,13 +147,10 @@
 %% The specified language will be used by all T__ macros and functions for the current process 
 %% if no explicit language was specified.
 %% Usage:
-%% T__LANGUAGE("en").
-%% T__LANGUAGE("es").
-%% T__LANGUAGE("en_GB").
-%% T__LANGUAGE("ro_RO").
-%% T__LANGUAGE("gsw").
-%% T__LANGUAGE("gsw_FR").
--define(T__LANGUAGE(Language), t__:language(Language)).
+%% ?T__LANGUAGE("en").
+%% ?T__LANGUAGE("es").
+%% ?T__LANGUAGE("en_GB").
+-define(T__LANGUAGE(Language), erlang:put(t__language, Language)).
 
 %% @doc Macro for creating a gettext reference
 %% Refrence information is added as a comment line starting with #: 
