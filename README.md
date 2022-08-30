@@ -1,0 +1,2 @@
+# t__
+Erlang gettext
