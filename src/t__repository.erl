@@ -37,13 +37,24 @@
     Error :: term().
 
 %% @doc Update the specified repository (only if file changes are detected).
-update(Application, Repository = #t__repository{}) ->
+update(Application, Repository = #t__repository{name = RepositoryName}) ->
     case update_check(Repository) of
         {true, NewFileList} ->
             ?T__LOG(debug, "Repository changed. Updating ETS tables.", [{application, Application}, {repository, Repository}]),
             update_force(Application, Repository, NewFileList);
         false -> {ok, Repository};
-        Error -> Error
+        Error ->
+            %% Most probable this is because repository directory:
+            %% - is invalid
+            %% - was deleted/no longer exists
+            %% Cleanup ETS tables
+            EtsMsgs = t__utils:ets_table_msgs(Application, RepositoryName),
+            EtsHeaders = t__utils:ets_table_headers(Application, RepositoryName),
+            EtsPot  = t__utils:ets_table_pot(Application, RepositoryName),
+            t__utils:ets_table_create_or_delete_all(EtsMsgs),
+            t__utils:ets_table_create_or_delete_all(EtsHeaders),
+            t__utils:ets_table_create_or_delete_all(EtsPot),
+            Error
     end.
 
 %%-------------------------------------------------------------
