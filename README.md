@@ -12,7 +12,7 @@ t__ is also available on [HEX](https://hex.pm/packages/t__).
 - Fast.
 - Simple. Reading this file should be enough for understanding most use case scenarios.
 - Documented source code with comments and specs.
-- Higly configurable with multiple PO sources and languages per erlang application or process.
+- Highly configurable with multiple PO sources and languages per Erlang application or process.
 - Supports contexts.
 - Supports interpolation using familiar Erlang format control sequences (from io:format).
 - Supports translating singular term with or without interpolation and with or without context.
