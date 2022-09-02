@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.5">
+    <meta name="project" content="t__ v0.1.0">
+
+    <title>t__ — t__ v0.1.0</title>
+    <link rel="stylesheet" href="dist/erlang-6d8ac4aa7a70488ac182.css" />
+
+    <script src="dist/sidebar_items-46fee247b4.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-b5f3440501744dc8be3d.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="https://github.com/ergenius/t__" class="sidebar-projectName" translate="no">
+t__
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L15" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">t__</span> 
+  <small class="app-vsn" translate="no">(t__ v0.1.0)</small>
+
+</h1>
+
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:config/0" translate="no">config/0</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:p/0" translate="no">p/0</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:repository/0" translate="no">repository/0</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#application/0" translate="no">application()</a>
+
+        </div>
+
+          <div class="summary-synopsis">Returns the name of the application to which the calling process belongs. If the specified process does not belong to any application the function returns 't__'.</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete/0" translate="no">config_delete()</a>
+
+        </div>
+
+          <div class="summary-synopsis">Deletes configuration for the calling process application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete/1" translate="no">config_delete(Application)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Deletes configuration for the specified application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete/2" translate="no">config_delete(Application, Timeout)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Deletes configuration for the specified application with the specified timeout.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete_cast/1" translate="no">config_delete_cast(Application)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Deletes configuration for the specified application asynchronous Sends an asynchronous request to the process handling the implementation and returns ok immediately.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_get/0" translate="no">config_get()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns the current configuration for the calling process.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_get/1" translate="no">config_get(Application)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns the current configuration for the specified application.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_get_environment/1" translate="no">config_get_environment(Application)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Returns the value of configuration t__config for Application</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set/1" translate="no">config_set(Config)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Sets a new configuration for the calling process application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set/2" translate="no">config_set(Application, Config)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Sets a new configuration for the specified application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set/3" translate="no">config_set(Application, Config, Timeout)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Sets a new configuration for the specified application with the specified timeout.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set_cast/2" translate="no">config_set_cast(Application, Config)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Sets a new configuration for the specified application asynchronous Sends an asynchronous request to the process handling the implementation and returns ok immediately.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#language/0" translate="no">language()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns the current language for the calling process.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#translate/1" translate="no">translate(Param)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Translate a singular or plural term, with or without repository, language and context This is the main translate function that does everything. using #t__p</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#translate/2" translate="no">translate(Param, Data)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Translate with data<p><em>See also: </em><a href="t__.html#translate/3">t__:translate/3</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#translate/3" translate="no">translate(Param, Data, Reference)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Translate with data and reference as separate parameters using #t__p</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#translate/7" translate="no">translate(Application, Repository, Language, Context, Msg, Data, Reference)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Translate with all separate parameters.</div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:config/0">
+
+  <div class="detail-header">
+    <a href="#t:config/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">config/0</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L34" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-type</span> config() :: #t__config{}.</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="t:p/0">
+
+  <div class="detail-header">
+    <a href="#t:p/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">p/0</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L35" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-type</span> p() :: #t__p{}.</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="t:repository/0">
+
+  <div class="detail-header">
+    <a href="#t:repository/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">repository/0</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L33" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-type</span> repository() :: #t__repository{}.</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="application/0">
+
+  <div class="detail-header">
+    <a href="#application/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">application()</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L45" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> application() -> t__ | Application when Application :: atom().</pre>
+
+      </div>
+
+Returns the name of the application to which the calling process belongs. If the specified process does not belong to any application the function returns 't__'.
+  </section>
+</section>
+<section class="detail" id="config_delete/0">
+
+  <div class="detail-header">
+    <a href="#config_delete/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete()</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L195" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_delete() -> ok | {error, Error} when Error :: term().</pre>
+
+      </div>
+
+Deletes configuration for the calling process application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p>
+  </section>
+</section>
+<section class="detail" id="config_delete/1">
+
+  <div class="detail-header">
+    <a href="#config_delete/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete(Application)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L202" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_delete(Application) -> ok | {error, Error} when Application :: atom(), Error :: term().</pre>
+
+      </div>
+
+Deletes configuration for the specified application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p>
+  </section>
+</section>
+<section class="detail" id="config_delete/2">
+
+  <div class="detail-header">
+    <a href="#config_delete/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete(Application, Timeout)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L216" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_delete(Application, Timeout) -> ok | {error, Error}
+                 when Application :: atom(), Timeout :: timeout(), Error :: term().</pre>
+
+      </div>
+
+<p>Deletes configuration for the specified application with the specified timeout.</p><p>There is a blocking gen_server call behind this! That's why there is a config_delete_cast version of this function for convenience.</p>Deleting applications config is possible but should not be abused. The system was designed for you to be able to change it at the application start or from an administration panel, from time to time.
+  </section>
+</section>
+<section class="detail" id="config_delete_cast/1">
+
+  <div class="detail-header">
+    <a href="#config_delete_cast/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete_cast(Application)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L226" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_delete_cast(Application) -> ok | {error, Error} when Application :: atom(), Error :: term().</pre>
+
+      </div>
+
+Deletes configuration for the specified application asynchronous Sends an asynchronous request to the process handling the implementation and returns ok immediately.<p><em>See also: </em><a href="t__.html#config_delete/2">t__:config_delete/2</a>.</p>
+  </section>
+</section>
+<section class="detail" id="config_get/0">
+
+  <div class="detail-header">
+    <a href="#config_get/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_get()</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L100" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_get() -> Config when Config :: <a href="t__.html#t:config/0">t__:config</a>().</pre>
+
+      </div>
+
+<p>Returns the current configuration for the calling process.</p><p>Please notice that the language config record field may not be the same to the calling process application config because language can also be configured at the process level. (The process level language overwrites the application configured language).</p><p>If you want to get the config holding application language, call t__:config/1 function.</p>The function will perform the following steps: - call erlang:get(t__language) to get any calling process specific language that will overwrite the language returned from the next calls - call application:get_env(t__config) - call application:get_env(t__, t__config) - if no t__config environment key was set for both the current application or the t__ application we return t__ default config
+  </section>
+</section>
+<section class="detail" id="config_get/1">
+
+  <div class="detail-header">
+    <a href="#config_get/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_get(Application)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L120" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_get(Application) -> Config when Application :: atom(), Config :: <a href="t__.html#t:config/0">t__:config</a>().</pre>
+
+      </div>
+
+<p>Returns the current configuration for the specified application.</p>The function will perform the following steps: - call application:get_env(t__config) - call application:get_env(t__, t__config) - if no t__config environment key was set for both the current application or the t__ application we return t__ default config
+  </section>
+</section>
+<section class="detail" id="config_get_environment/1">
+
+  <div class="detail-header">
+    <a href="#config_get_environment/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_get_environment(Application)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L131" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Returns the value of configuration t__config for Application
+  </section>
+</section>
+<section class="detail" id="config_set/1">
+
+  <div class="detail-header">
+    <a href="#config_set/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set(Config)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L150" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_set(Config) -> ok | {error, Error} when Config :: <a href="t__.html#t:config/0">t__:config</a>(), Error :: term().</pre>
+
+      </div>
+
+Sets a new configuration for the calling process application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p>
+  </section>
+</section>
+<section class="detail" id="config_set/2">
+
+  <div class="detail-header">
+    <a href="#config_set/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set(Application, Config)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L158" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_set(Application, Config) -> ok | {error, Error}
+              when Application :: atom(), Config :: <a href="t__.html#t:config/0">t__:config</a>(), Error :: term().</pre>
+
+      </div>
+
+Sets a new configuration for the specified application with infinity timeout.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p>
+  </section>
+</section>
+<section class="detail" id="config_set/3">
+
+  <div class="detail-header">
+    <a href="#config_set/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set(Application, Config, Timeout)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L174" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_set(Application, Config, Timeout) -> ok | {error, Error}
+              when
+                  Application :: atom(),
+                  Config :: <a href="t__.html#t:config/0">t__:config</a>(),
+                  Timeout :: timeout(),
+                  Error :: term().</pre>
+
+      </div>
+
+<p>Sets a new configuration for the specified application with the specified timeout.</p><p>There is a blocking gen_server call behind this! That's why there is a config_set_cast version of this function for convenience. However I don't recommend using that because you will not know if the operation failed.</p>Changing applications config is possible but should not be abused. The system was designed for you to be able to change it at the application start or from an administration panel, from time to time.
+  </section>
+</section>
+<section class="detail" id="config_set_cast/2">
+
+  <div class="detail-header">
+    <a href="#config_set_cast/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set_cast(Application, Config)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L185" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> config_set_cast(Application, Config) -> ok | {error, Error}
+                   when Application :: atom(), Config :: <a href="t__.html#t:config/0">t__:config</a>(), Error :: term().</pre>
+
+      </div>
+
+Sets a new configuration for the specified application asynchronous Sends an asynchronous request to the process handling the implementation and returns ok immediately.<p><em>See also: </em><a href="t__.html#config_set/3">t__:config_set/3</a>.</p>
+  </section>
+</section>
+<section class="detail" id="language/0">
+
+  <div class="detail-header">
+    <a href="#language/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">language()</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L64" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> language() -> Language when Language :: string().</pre>
+
+      </div>
+
+<p>Returns the current language for the calling process.</p><p>When you properly setup the language for the process, the expected time complexity for the current implementation of this macro is O(1) and the worst case time complexity is O(N), where N is the number of items in the process dictionary.</p>The function will perform the following steps in order to determine the default language: - call erlang:get(t__language) - call application:get_env(t__config) - call application:get_env(t__, t__config) - if no t__config environment key was set for both the current application or the t__ application we return t__ default language.
+  </section>
+</section>
+<section class="detail" id="translate/1">
+
+  <div class="detail-header">
+    <a href="#translate/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">translate(Param)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L238" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> translate(Param) -> Msg when Param :: term(), Msg :: string().</pre>
+
+      </div>
+
+Translate a singular or plural term, with or without repository, language and context This is the main translate function that does everything. using #t__p
+  </section>
+</section>
+<section class="detail" id="translate/2">
+
+  <div class="detail-header">
+    <a href="#translate/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">translate(Param, Data)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L279" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> translate(Param, Data) -> Msg when Param :: term(), Data :: undefined | list(), Msg :: string().</pre>
+
+      </div>
+
+Translate with data<p><em>See also: </em><a href="t__.html#translate/3">t__:translate/3</a>.</p>
+  </section>
+</section>
+<section class="detail" id="translate/3">
+
+  <div class="detail-header">
+    <a href="#translate/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">translate(Param, Data, Reference)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L288" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> translate(Param, Data, Reference) -> Msg
+             when
+                 Param :: term(),
+                 Data :: undefined | list(),
+                 Reference :: undefined | string(),
+                 Msg :: string().</pre>
+
+      </div>
+
+Translate with data and reference as separate parameters using #t__p
+  </section>
+</section>
+<section class="detail" id="translate/7">
+
+  <div class="detail-header">
+    <a href="#translate/7" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">translate(Application, Repository, Language, Context, Msg, Data, Reference)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__.erl#L313" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> translate(Application, Repository, Language, Context, Msg, Data, Reference) -> TranslatedMsg
+             when
+                 Application :: undefined | atom(),
+                 Repository :: undefined | string() | atom() | binary(),
+                 Language :: undefined | string() | atom() | binary(),
+                 Context :: undefined | string() | atom() | binary(),
+                 Msg :: string() | atom() | binary(),
+                 Data :: undefined | list(),
+                 Reference :: undefined | string(),
+                 TranslatedMsg :: string().</pre>
+
+      </div>
+
+Translate with all separate parameters.
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+          <p>
+            On Hex.pm:
+
+            <span class="line">
+              <a href="https://hex.pm/packages/t__/0.1.0" class="line footer-hex-package">Package</a>
+              <a href="https://preview.hex.pm/preview/t__/0.1.0" class="line">Preview</a>
+
+                <a href="https://preview.hex.pm/preview/t__/0.1.0/show/src/t__.erl">(current file)</a>
+
+            </span>
+
+            <button class="line footer-button display-quick-switch">
+              Search
+            </button>
+          </p>
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.5) for the
+
+            <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

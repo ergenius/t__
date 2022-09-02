@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com> <www.ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above
@@ -23,20 +23,32 @@
 -export([start/2]).
 -export([stop/1]).
 
-%% @spec start(Type, Args) -> ServerRet
-%% @doc application start callback.
-start(Type, Args) ->
+-spec start(StartType, StartArgs) -> {ok, Pid} | {ok, Pid, State} | {error, Reason} when
+    StartType :: application:start_type(),
+    StartArgs :: term(),
+    Pid :: pid(),
+    State :: term(),
+    Reason :: term().
+%% @doc This function is called whenever an application is started using start/1,2,
+%% and is to start the processes of the application. If the application is structured
+%% according to the OTP design principles as a supervision tree,
+%% this means starting the top supervisor of the tree.
+start(StartType, StartArgs) ->
 
-    ?T__LOG(debug, "t__ start", [{type, Type}, {args, Args}]),
+    ?T__LOG(debug, "t__ start", [{type, StartType}, {args, StartArgs}]),
 
     %% Start application main supervisor
-    case t__sup:start_link(Args) of
+    case t__sup:start_link(StartArgs) of
         {ok, Pid} -> {ok, Pid};
         Error ->
             ?T__LOG(debug, "t__sup:start_link failed!", [{error, Error}]),
             Error
     end.
 
-%% @spec stop(State) -> ServerRet
-%% @doc application stop callback.
+-spec stop(State) -> Ignored when
+    State :: term(),
+    Ignored :: term().
+%% @doc This function is called whenever an application has stopped.
+%% It is intended to be the opposite of Module:start/2 and is to do any necessary cleaning up.
+%% The return value is ignored.
 stop(_State) -> ok.

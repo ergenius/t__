@@ -20,7 +20,7 @@
 -include_lib("eunit/include/eunit.hrl").
 -include_lib("t__/include/t__.hrl").
 
--define(T__EXAMPLES_PATH, filename:join([filename:dirname(filename:dirname(code:which(?MODULE)))])).
+-define(T__APP_PATH, filename:join([filename:dirname(filename:dirname(code:which(?MODULE)))])).
 
 %% Writing test generating functions
 %%
@@ -55,11 +55,11 @@ application_test_() ->
 				repositories = [
 					#t__repository{
 						name = "default",
-						directory = filename:join([?T__EXAMPLES_PATH, "examples/repositories/default"])
+						directory = filename:join([?T__APP_PATH, "repositories/default"])
 					},
 					#t__repository{
 						name = "template1",
-						directory = filename:join([?T__EXAMPLES_PATH, "examples/repositories/template1"])
+						directory = filename:join([?T__APP_PATH, "repositories/template1"])
 					}
 				]
 			},

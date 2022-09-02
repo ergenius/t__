@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.5">
+    <meta name="project" content="t__ v0.1.0">
+
+    <title>t__srv — t__ v0.1.0</title>
+    <link rel="stylesheet" href="dist/erlang-6d8ac4aa7a70488ac182.css" />
+
+    <script src="dist/sidebar_items-46fee247b4.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-b5f3440501744dc8be3d.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-projectDetails">
+      <a href="https://github.com/ergenius/t__" class="sidebar-projectName" translate="no">
+t__
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L15" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">t__srv</span> 
+  <small class="app-vsn" translate="no">(t__ v0.1.0)</small>
+
+</h1>
+
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#code_change/3" translate="no">code_change(OldVsn, State, Extra)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Handle gen_server code change This function is called by a gen_server process when it is to update its internal state during a release upgrade/downgrade, that is, when the instruction {update,Module,Change,...}, where Change={advanced,Extra}, is specifed in the appup file. For more information, see section Release Handling Instructions in OTP Design Principles.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete_call/2" translate="no">config_delete_call(Application, Timeout)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Config delete See t__:config_delete/2 for more details</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_delete_cast/1" translate="no">config_delete_cast(Application)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Config delete See t__:config_delete_cast/2 for more details</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set_call/3" translate="no">config_set_call(Application, Config, Timeout)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Config set See t__:config_set/3 for more details</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#config_set_cast/2" translate="no">config_set_cast(Application, Config)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Config set See t__:config_set_cast/3 for more details</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_call/3" translate="no">handle_call(Msg, From, State)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Handle gen_server calls Whenever a gen_server process receives a request sent using call/2,3 or multi_call/2,3,4, this function is called to handle the request.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_cast/2" translate="no">handle_cast(Msg, State)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Handle gen_server casts Whenever a gen_server process receives a request sent using cast/2 or abcast/2,3, this function is called to handle the request. For a description of the arguments and possible return values, see Module:handle_call/3.</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_info/2" translate="no">handle_info(Info, State)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Handle gen_server info This function is called by a gen_server process when a time-out occurs or when it receives any other message than a synchronous or asynchronous request (or a system message). Info is either the atom timeout, if a time-out has occurred, or the received message. For a description of the other arguments and possible return values, see Module:handle_call/3.</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#init/1" translate="no">init(Args)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Init gen_server Whenever a gen_server process is started using start/3,4 or start_link/3,4, this function is called by the new process to initialize.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#start_link/1" translate="no">start_link(Args)</a>
+
+        </div>
+
+          <div class="summary-synopsis">Creates a gen_server process as part of a supervision tree. The function should be called, directly or indirectly, by the supervisor. It will, among other things, ensure that the gen_server is linked to the supervisor.</div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#terminate/2" translate="no">terminate(Reason, State)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Handle gen_server terminate</p></div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="code_change/3">
+
+  <div class="detail-header">
+    <a href="#code_change/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">code_change(OldVsn, State, Extra)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L205" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Handle gen_server code change This function is called by a gen_server process when it is to update its internal state during a release upgrade/downgrade, that is, when the instruction {update,Module,Change,...}, where Change={advanced,Extra}, is specifed in the appup file. For more information, see section Release Handling Instructions in OTP Design Principles.</p><p>For an upgrade, OldVsn is Vsn, and for a downgrade, OldVsn is {down,Vsn}. Vsn is defined by the vsn attribute(s) of the old version of the callback module Module. If no such attribute is defined, the version is the checksum of the Beam file.</p><p>State is the internal state of the gen_server process. Extra is passed &quot;as is&quot; from the {advanced,Extra} part of the update instruction.</p>If successful, the function must return the updated internal state. If the function returns {error,Reason}, the ongoing upgrade fails and rolls back to the old release.
+  </section>
+</section>
+<section class="detail" id="config_delete_call/2">
+
+  <div class="detail-header">
+    <a href="#config_delete_call/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete_call(Application, Timeout)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L58" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Config delete See t__:config_delete/2 for more details
+  </section>
+</section>
+<section class="detail" id="config_delete_cast/1">
+
+  <div class="detail-header">
+    <a href="#config_delete_cast/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_delete_cast(Application)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L62" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Config delete See t__:config_delete_cast/2 for more details
+  </section>
+</section>
+<section class="detail" id="config_set_call/3">
+
+  <div class="detail-header">
+    <a href="#config_set_call/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set_call(Application, Config, Timeout)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L50" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Config set See t__:config_set/3 for more details
+  </section>
+</section>
+<section class="detail" id="config_set_cast/2">
+
+  <div class="detail-header">
+    <a href="#config_set_cast/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">config_set_cast(Application, Config)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L54" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Config set See t__:config_set_cast/3 for more details
+  </section>
+</section>
+<section class="detail" id="handle_call/3">
+
+  <div class="detail-header">
+    <a href="#handle_call/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_call(Msg, From, State)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L111" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Handle gen_server calls Whenever a gen_server process receives a request sent using call/2,3 or multi_call/2,3,4, this function is called to handle the request.</p><p>Request is the Request argument provided to call or multi_call. From is a tuple {Pid,Tag}, where Pid is the pid of the client and Tag is a unique tag. State is the internal state of the gen_server process.</p><p>If {reply,Reply,NewState} is returned, {reply,Reply,NewState,Timeout} or {reply,Reply,NewState,hibernate}, Reply is given back to From as the return value of call/2,3 or included in the return value of multi_call/2,3,4. The gen_server process then continues executing with the possibly updated internal state NewState.</p><p>For a description of Timeout and hibernate, see Module:init/1.</p><p>If {noreply,NewState} is returned, {noreply,NewState,Timeout}, or {noreply,NewState,hibernate}, the gen_server process continues executing with NewState. Any reply to From must be specified explicitly using reply/2.</p><p>If {stop,Reason,Reply,NewState} is returned, Reply is given back to From.</p>If {stop,Reason,NewState} is returned, any reply to From must be specified explicitly using reply/2. The gen_server process then calls Module:terminate(Reason,NewState) and terminates.
+  </section>
+</section>
+<section class="detail" id="handle_cast/2">
+
+  <div class="detail-header">
+    <a href="#handle_cast/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_cast(Msg, State)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L134" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Handle gen_server casts Whenever a gen_server process receives a request sent using cast/2 or abcast/2,3, this function is called to handle the request. For a description of the arguments and possible return values, see Module:handle_call/3.
+  </section>
+</section>
+<section class="detail" id="handle_info/2">
+
+  <div class="detail-header">
+    <a href="#handle_info/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_info(Info, State)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L159" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+Handle gen_server info This function is called by a gen_server process when a time-out occurs or when it receives any other message than a synchronous or asynchronous request (or a system message). Info is either the atom timeout, if a time-out has occurred, or the received message. For a description of the other arguments and possible return values, see Module:handle_call/3.
+  </section>
+</section>
+<section class="detail" id="init/1">
+
+  <div class="detail-header">
+    <a href="#init/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">init(Args)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L83" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Init gen_server Whenever a gen_server process is started using start/3,4 or start_link/3,4, this function is called by the new process to initialize.</p><p>Args is the Args argument provided to the start function. If the initialization is successful, the function is to return {ok,State}, {ok,State,Timeout}, or {ok,State,hibernate}, where State is the internal state of the gen_server process.</p><p>If an integer time-out value is provided, a time-out occurs unless a request or a message is received within Timeout milliseconds. A time-out is represented by the atom timeout, which is to be handled by the Module:handle_info/2 callback function. The atom infinity can be used to wait indefinitely, this is the default value.</p><p>If hibernate is specified instead of a time-out value, the process goes into hibernation when waiting for the next message to arrive (by calling proc_lib:hibernate/3).</p>If the initialization fails, the function is to return {stop, Reason}, where Reason is any term, or ignore.
+  </section>
+</section>
+<section class="detail" id="start_link/1">
+
+  <div class="detail-header">
+    <a href="#start_link/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">start_link(Args)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L46" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">-spec</span> start_link(Args :: <a href="https://www.erlang.org/doc/man/proplists.html#type-proplist">proplists:proplist</a>()) -> {ok, pid()} | ignore | {error, term()}.</pre>
+
+      </div>
+
+Creates a gen_server process as part of a supervision tree. The function should be called, directly or indirectly, by the supervisor. It will, among other things, ensure that the gen_server is linked to the supervisor.
+  </section>
+</section>
+<section class="detail" id="terminate/2">
+
+  <div class="detail-header">
+    <a href="#terminate/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">terminate(Reason, State)</h1>
+
+      <a href="https://github.com/ergenius/t__/blob/v0.1.0/src/t__srv.erl#L190" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Handle gen_server terminate</p><p>This function is called by a gen_server process when it is about to terminate. It is to be the opposite of Module:init/1 and do any necessary cleaning up. When it returns, the gen_server process terminates with Reason. The return value is ignored.</p><p>Reason is a term denoting the stop reason and State is the internal state of the gen_server process.</p><p>Reason depends on why the gen_server process is terminating. If it is because another callback function has returned a stop tuple {stop,..}, Reason has the value specified in that tuple. If it is because of a failure, Reason is the error reason.</p><p>If the gen_server process is part of a supervision tree and is ordered by its supervisor to terminate, this function is called with Reason=shutdown if the following conditions apply: - The gen_server process has been set to trap exit signals. - The shutdown strategy as defined in the child specification of the supervisor is an integer time-out value, not brutal_kill.</p><p>Even if the gen_server process is not part of a supervision tree, this function is called if it receives an 'EXIT' message from its parent. Reason is the same as in the 'EXIT' message. Otherwise, the gen_server process terminates immediately.</p>Notice that for any other reason than normal, shutdown, or {shutdown,Term}, the gen_server process is assumed to terminate because of an error and an error report is issued using error_logger:format/2.
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+          <p>
+            On Hex.pm:
+
+            <span class="line">
+              <a href="https://hex.pm/packages/t__/0.1.0" class="line footer-hex-package">Package</a>
+              <a href="https://preview.hex.pm/preview/t__/0.1.0" class="line">Preview</a>
+
+                <a href="https://preview.hex.pm/preview/t__/0.1.0/show/src/t__srv.erl">(current file)</a>
+
+            </span>
+
+            <button class="line footer-button display-quick-switch">
+              Search
+            </button>
+          </p>
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.5) for the
+
+            <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

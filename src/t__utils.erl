@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above
@@ -19,94 +19,9 @@
 -include("../include/t__.hrl").
 
 -export([
-    ets_table_msgs/2, ets_table_headers/2, ets_table_pot/2,
-    ets_table_ensure/1,
-    ets_table_delete/1,
-	ets_table_create_or_delete_all/1,
-
-	ets_lookup/2, ets_insert/2,
-
-    dir_list_files/3,
-
+    dir_list_files/3, dir_del_r/1,
 	name_to_string/1
 ]).
-
-%% @doc Prefix for applications ETS cache tables
--define(T__ETS_PREFIX, "t__").
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% ets_
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% @doc Return the ETS table holding messages for the specified application repository
-ets_table_msgs(Application, RepositoryName) -> 
-    ApplicationL = name_to_string(Application),
-    RepositoryName = name_to_string(RepositoryName),
-    erlang:list_to_atom(?T__ETS_PREFIX++ApplicationL++"_"++RepositoryName++"_msgs").
-
-%% @doc Return the ETS table holding PO headers for the specified application repository
-ets_table_headers(Application, RepositoryName) ->
-    ApplicationL = name_to_string(Application),
-    RepositoryName = name_to_string(RepositoryName),
-    erlang:list_to_atom(?T__ETS_PREFIX++ApplicationL++"_"++RepositoryName++"_headers").
-
-%% @doc Return the ETS table holding plural formula for the specified application repository
-ets_table_pot(Application, RepositoryName) -> 
-    ApplicationL = name_to_string(Application),
-    RepositoryName = name_to_string(RepositoryName),
-    erlang:list_to_atom(?T__ETS_PREFIX++ApplicationL++"_"++RepositoryName++"_pot").
-
-%% @doc Ensure the specified table exists
-%% This function should not be called before any ETS table operation but only on errors and exceptions
-%% to avoid ets:info call cost.
-ets_table_ensure(Table) when erlang:is_atom(Table) ->
-    case ets:info(Table) of 
-        undefined -> 
-            ets:new(Table, [set, named_table, public]),
-            new;
-        _ -> exist
-    end.
-
-%% @doc Delete the specified table without throwing an error if the table does not exist
-ets_table_delete(Table) ->
-    try ets:delete(Table)
-    catch _Exception:_Reason -> false
-    end.
-
-%% @doc Create the table if does not exist or delete all object if it does
-ets_table_create_or_delete_all(Table) ->
-	case ets:info(Table) of
-		undefined ->
-			ets:new(Table, [set, named_table, public]),
-			ok;
-		_ ->
-			ets:delete_all_objects(Table),
-			ok
-	end.
-
-%% @doc Returns a list of all objects with key Key in table Table without throwing exception
-ets_lookup(Table, Key) ->
-	try ets:lookup(Table, Key)
-	catch Exception:Reason ->
-		?T__LOG(error, "ets:lookup Exception!",	[
-			{exception, {Exception, Reason}},
-			{table, Table},
-			{key, Key}
-		]),
-		[]
-	end.
-
-%% @doc Inserts the object or all of the objects in list into table Table without throwing exception
-ets_insert(Table, ObjectOrObjects) ->
-	try ets:insert(Table, ObjectOrObjects)
-	catch Exception:Reason ->
-		?T__LOG(error, "ets:insert Exception!",	[
-			{exception, {Exception, Reason}},
-			{table, Table},
-			{object_or_objects, ObjectOrObjects}
-		]),
-		[]
-	end.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% dir_
@@ -142,6 +57,27 @@ dir_list_files_match(_Filename, #file_info{type = Type}, Types, _Extensions) whe
 	erlang:is_list(Types) -> lists:member(Type, Types);
 dir_list_files_match(Filename, _FileInfo, _Types, Extensions) when
 	erlang:is_list(Extensions) -> lists:member(filename:extension(Filename), Extensions).
+
+-spec dir_del_r(File) -> ok | {error, Reason} when
+	File :: file:name_all(),
+	Reason :: file:posix() | badarg.
+
+%% @doc Deletes file or directory File. If File is a directory, its contents is first recursively deleted.
+%% Same as new file:del_dir_r/1 introduced in OTP 23.0 for compatibility with older Erlang
+dir_del_r(File) ->
+	case file:read_link_info(File) of
+		{ok, #file_info{type = directory}} ->
+			case file:list_dir_all(File) of
+				{ok, Names} ->
+					lists:foreach(fun(Name) ->
+						dir_del_r(filename:join(File, Name))
+								  end, Names);
+				{error, _Reason} -> ok
+			end,
+			file:del_dir(File);
+		{ok, _FileInfo} -> file:delete(File);
+		{error, _Reason} = Error -> Error
+	end.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% name_to_string

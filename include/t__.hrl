@@ -14,7 +14,7 @@
 %% OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 -author("Madalin Grigore-Enescu").
 
-%% @doc Default language code string.
+%% Default language code string.
 %% 
 %% Don't edit this! Overwrite it using the following ways:
 %% - call TL__("language_code") in your process to setup the language per process. Best performance/higly recommended.
@@ -25,34 +25,47 @@
 %% However if you want to modify the default behaviour of all applications running on your node, you can do this.
 -define(T__DEFAULT_LANGUAGE, "en").
 
-%% @doc Holds repository information
+%% Holds repository information
 -record(t__repository, {
 
-	%% Repository name
-	%% This must be a unique non empty string (per application) and it is used to identify the repository
-	%% when calling translate functions. You can use whatever format fits your application
-	%% requirements, any UTF8 character is allowed in any order.
-	name = undefined :: undefined : string(),
-
 	%% Repository directory
+	%% Mandatory.
+	%%
 	%% Path to the directory where PO files are located.
 	%% Files must be placed directly into the directory, one file per language.
 	%% It is recommended (but not required) that the name of the file to be the
 	%% same with the PO file header Language.
 	directory = undefined :: undefined : string(),
 
+	%% Repository name
+	%% Optional (If it is undefined, t__ will try to read it from the repository.config file if any).
+	%%
+	%% This must be a unique non empty string (per application) and it is used to identify the repository
+	%% when calling translate functions. You can use whatever format fits your application
+	%% requirements, any UTF8 character is allowed in any order.
+	name = undefined :: undefined : string(),
+
+	%% Repository languages
+	%% Optional (If it is undefined, t__ will try to read it from the repository.config file if any).
+	%%
+	%% In development mode t__ will generate the proper po files automatically for
+	%% all the languages you set here. This is a nice and easy way to create a repository
+	%% po files from scratch. Also if you modify this list in development mode t__ will
+	%% update your repository accordingly, generating proper new po files.
+	%% If this is undefined, t__ will try to read it from the repository.config file.
+	languages = undefined :: list(),
+
+	%% Do not set this!
 	%% This is internally used by our translation server to keep track
-	%% of the repository files changes. If you set it, it will be replaced.
-	%% It contains a list of {Filename, FileInfo} tuples when it's automatically
+	%% of the repository files changes. If you set it, the value will be replaced.
+	%% It contains a list of {Filename, FileInfo} tuples automatically
 	%% populated by the PO monitor server or it's undefined when
 	%% the application config development mode is disabled (false).
 	files = undefined :: undefined | [{string(), term()}]
 
 }).
 
--type t__repository() :: #t__repository{}.
-
-%% @doc Record for holding t__ configuration options that you can use with t__:config to configure
+%% Record for holding t__ configuration options that you can use with t__:config to configure
 %% t__ behaviour.
 %%
 %% This record is set as an environment variable per each application using t__
@@ -71,22 +84,22 @@
 	%% It is obviously highly recommended to DISABLE developer mode in production!
 	%%
 	%% When in developer mode the t__srv monitor monitor PO file changes and
-	%% collect all translated strings into a POT file.
-	%% The cache ETS tables are still used by the t__ but they will be evicted
-	%% everytime the PO files are modified.
+	%% collect all untranslated strings. The repository PO files translations
+	%% are still cached into an ETS table but the cache is evicted everytime the PO
+	%% files are modified.
+	%%
+	%% If dev mode is false, no untranslated strings are collected.
 	dev = false :: true | false,
 
 	%% Application PO & POT files repositories
 	%% If you enable generation of the POT file at runtime, please make sure
 	%% the repositories path is writable by the erlang node process because
 	%% t__ will create a POT file there.
-	repositories = [] :: [t__repository()]
+	repositories = [] :: [t__:repository()]
 
 }).
 
--type t__config() :: #t__config{}.
-
-%% @doc Record for holding all parameters that you can use with T__ macro.
+%% Record for holding all parameters that you can use with T__ macro.
 -record(t__p, {
 
 	%% Application
@@ -128,9 +141,7 @@
 
 }).
 
--type t__p() :: #t__p{}.
-
-%% @doc Returns the current language for the calling process.
+%% Returns the current language for the calling process.
 %% 
 %% When you properly setup the language for the process, the expected time complexity for the current implementation 
 %% of this macro is O(1) and the worst case time complexity is O(N), where N is the number of items in the process dictionary.
@@ -143,16 +154,18 @@
 %% we return t__ default language defined in this hrl file
 -define(T__LANGUAGE(), t__:language()).
 
-%% @doc Sets the language for the calling process
+%% Sets the language for the calling process
 %% The specified language will be used by all T__ macros and functions for the current process 
 %% if no explicit language was specified.
 %% Usage:
+%% ```
 %% ?T__LANGUAGE("en").
 %% ?T__LANGUAGE("es").
 %% ?T__LANGUAGE("en_GB").
+%% '''
 -define(T__LANGUAGE(Language), erlang:put(t__language, Language)).
 
-%% @doc Macro for creating a gettext reference
+%% Macro for creating a gettext reference
 %% Refrence information is added as a comment line starting with #: 
 %% into the generated POT file above the msgid.
 %%
@@ -163,63 +176,87 @@
 %% ?FILE:?LINE ?MODULE:?FUNCTION_NAME/?FUNCTION_ARITY format
 -define(T__REFERENCE(), io_lib:format("~p:~p - ~p:~p/~p", [?FILE, ?LINE, ?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY])).
 
-%% @doc Translate singular or plural term, with or without context and repository, 
+%% Translate singular or plural term, with or without context and repository,
 %% for the application to which the calling process belongs to.
 %%
 %% Singular terms:
+%% ```
 %% ?T__("I have a joke about Erlang, but it requires a prologue.")
 %% You can use binaries and atoms, however it is not recommended.
 %% ?T__(<<"Erlang is user-friendly, it’s just picky about its friends!">>)
 %% ?T__('Why can't you trust atoms? Because they make up everything!')
+%% '''
 %%
 %% Singular with context:
 %% Context is useful for the translators to distinguish in between identical strings.
+%% ```
 %% ?T__({"menu", "Save"})
 %% ?T__({"menu", "Quit"})
 %% ?T__({"button", "Save"})
 %% ?T__({"button", "Cancel"})
+%% '''
 %% Context can also be used to create proper translations based on grammatical gender.
+%% ```
 %% ?T__({"female", "The cat belong to him/her"})
 %% ?T__({"male", "The cat belong to him/her"})
+%% '''
 %%
 %% Singular with repository:
 %% Repositories are used to have different translations sources directories for the same application.
 %% For example let's assume your application has many different HTML templates,
 %% each with his own translation directory.
+%% ```
 %% ?T__({"template1", {"Simple term from repository template1"}})
 %% ?T__({"template2", {"Simple term from repository template2"}})
+%% '''
 %% Repository can be combined with context also.
+%% ```
 %% ?T__({"template1", {"menu", "Save"}})
+%% '''
 %% 
 %% Singular terms with interpolation:
-%% ?T__("$~2f", [3.56])
+%% ```
+%% ?T__("$~4.2f", [3.56])
+%% '''
 %%
 %% Context can also be used to create the proper translation based on grammatical gender combined with interpolation:
+%% ```
 %% ?T__({"female", "Her/his name is ~s"}, ["Marry"])
 %% ?T__({"male", "Her/his name is ~s"}, ["John"])
+%% '''
 %%
 %% Plural terms with interpolation:
+%% ```
 %% ?T__(["~B user", "~B users"], [3])
+%% '''
 %%
 %% Plural terms with context and interpolation:
+%% ```
 %% ?T__({"female", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
 %% ?T__({"male", ["~B file belongs to her/him", "~B files belong to her/him"]}, [3])
+%% '''
 %%
 %% Plural terms with context, interpolation and repositories:
+%% ```
 %% ?T__({"template1", {"female", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
 %% ?T__({"template1", {"male", ["~B file belongs to her/him", "~B files belong to her/him"]}}, [3])
+%% '''
 %%
 %% You can also specify everything using the #t__p{} record as a single parameter to the T__ macro.
 %% This is actually the performance wise way of doing it. You will save some extra functions calls necessary
 %% to understand your tuples. All #t__p{} fields except msg are optional.
+%% ```
 %% ?T__(#t__p{msg = "Hello world"}).
 %% ?T__(#t__p{msg = "Her name is ~s", data = ["Marry"]}).
 %% ?T__(#t__p{language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
 %% ?T__(#t__p{repository = "module1", language = "ro", context = "male", msg = "Her/his name is ~s", data = ["John"]}).
 %% ?T__(#t__p{application=myapp, repository = "module1", language = "ro", context = "female", msg = "Her/his name is ~s", data = ["Marry"]}).
+%% '''
 %%
 %% For your convenience a macro also exists with all possible parameters:
+%% ```
 %% ?T__(Application, Repository, Language, Context, Msg, Data).
+%% '''
 %%
 %% As you probably noticed in the examples above, interpolation is using Erlang format control sequences 
 %% (io:format style parameter).
@@ -264,7 +301,7 @@
 	data = Data,
 	reference = ?T__REFERENCE()})).
 
-%% @doc Log a message
+%% Log a message
 %% OTP_RELEASE macro was introduced in OTP release 21
 %% when we have the new logger API
 -ifdef(OTP_RELEASE).

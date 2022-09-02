@@ -1,12 +1,12 @@
 # t__
-Erlang gettext translation application
+Erlang gettext
+
+Short story this library offers almost the same functionalities as [elixir-gettext](https://github.com/elixir-gettext/gettext) does but in a pure Erlang implementation.
 
 [![Erlang CI](https://github.com/ergenius/t__/actions/workflows/erlang.yml/badge.svg)](https://github.com/ergenius/t__/actions/workflows/erlang.yml)
 
-## News
-
 ## Features
-- T__("I have a joke about Erlang, but it requires a prologue.")
+- ?T__("I have a joke about Erlang, but it requires a prologue.")
 - Fast.
 - Simple. Reading this file should be enough for understanding most use case scenarios.
 - Documented source code with comments and specs.
@@ -15,35 +15,66 @@ Erlang gettext translation application
 - Supports interpolation using familiar Erlang format control sequences (from io:format).
 - Supports translating singular term with or without interpolation and with or without context.
 - Supports translating plural term with or without interpolation and with or without context.
+- Supports all plural terms formulas defined by UNICODE CLDR.
 - Supports ETS tables based caching.
+- Supports collecting translated strings and outputing them to a POT file.
 
 ## Alternatives
+
+We don't list Elixir alternatives since this is a pure Erlang application.
 
 - Erlang Gettext tools for multi-lingual capabilities: https://github.com/etnt/gettext
 
 ### Quick comparison with Erlang Gettext
 
-| #   | | t__ | gettext |
-|-----| --- |-----|----|
-| 1   | Single macro that handles everything | YES: T__| NO: TXT & TXT2 |
-| 2   | gettext contexts | YES | NO |
-| 3   | gettext plural terms | YES: supports gettext plural formulas for languages with more than 2 plural forms | NO |
-| 4   | Separate configurations for each application started at the same node | YES | NO |
-| 5   | Diffrent language sources | YES: using application 'repositories' | YES: using diffrent languages servers |
-| 6   | Developer mode/monitoring PO file changes | YES: automatically detecting PO changes | NO: requires manual reloading of the PO files |
-| 7   | Cache | YES: ETS reads/writes on the calling process (faster) | YES: ETS reads/writes inside the translation gen_server |
+| #   | Feature                                                               | t__                                                                               | gettext                                                 |
+|-----|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------|
+| 1   | Single macro that handles everything                                  | YES: T__                                                                          | NO: TXT & TXT2                                          |
+| 2   | gettext contexts                                                      | YES                                                                               | NO                                                      |
+| 3   | gettext plural terms                                                  | YES: supports gettext plural formulas for languages with more than 2 plural forms | NO                                                      |
+| 4   | Separate configurations for each application started at the same node | YES                                                                               | NO                                                      |
+| 5   | Diffrent language sources                                             | YES: using application 'repositories'                                             | YES: using diffrent languages servers                   |
+| 6   | Developer mode/monitoring PO file changes                             | YES: automatically detecting PO changes                                           | NO: requires manual reloading of the PO files           |
+| 7   | Cache                                                                 | YES: ETS reads/writes on the calling process (faster)                             | YES: ETS reads/writes inside the translation gen_server |
+| 8   | Automatically sync all existing entries to .pot                       | YES                                                                               | NO                                                      |
+
+## Plural formulas
+
+### Is plural formula data correct?
+
+Short answer: Yes, if you trust CLDR Project.
+
+### How plural formulas where generated from CLDR?
+
+For mantaining plural formulas database we started another project here: [gettext-po-samples](https://github.com/ergenius/gettext-po-samples)
+
+We use the following sources and tools for compiling the database:
+
+- [cldr.unicode.org](https://cldr.unicode.org/)
+- [PHP gettext language list](https://github.com/php-gettext/Languages)
+- [TranslateHouse](http://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html)
+
+Formulas are automated generated by [PHP gettext language list](https://github.com/php-gettext/Languages) from CLDR. Each new release is manually checked and compared with the sources mentioned above. Data is compiled into [plural-forms.eterm](https://github.com/ergenius/gettext-po-samples/blob/main/data/plural-forms.eterm) file.
+The same [plural-forms.eterm](https://github.com/ergenius/gettext-po-samples/blob/main/data/plural-forms.eterm) file is used to generate [src/t__plural.erl](src/t__plural.erl) file.
 
 ## Limitations
+
 - Gettext plural-forms formulas are hardcoded using a database. Work is underway to bypass this limitation and provide a full interpretor of any arbitrary gettext C formula.
 
-## Examples
+## Usage
+
+### Full demo application provided
+
+You can find a full demo application into [demoapp](demoapp).
+The application demonstrate most functionalities, including using multiple repositories and t__ being able to monitor repositories PO changes and reload them in real time. 
+You can test this feature by modifying any PO files used by the demoapp while you run the application in console mode. A gen_server constinously translating strings on a timer is provided, so you can easily check the updates. 
 
 ### Set/get the calling process language
 
 #### Set the language
 
 It is higly recommended to set the calling process language in order to avoid specifying the language for each ?T__ macro call.
-The specified language will be used by all T__ macros and functions for the current process if no explicit language is specified as a macro or function parameter.
+The specified language will be used by all ?T__ macros and functions for the current process if no explicit language is specified as a macro or function parameter.
 
 ```erlang
 ?T__LANGUAGE("en").
@@ -201,7 +232,7 @@ None.
 
 ## Authors
 
-- Madalin Grigore-Enescu (ergenius) <github@ergenius.com>
+- Madalin Grigore-Enescu (ergenius) - [Github](https://github.com/ergenius) [ergenius.com](<https://ergenius.com>)
 
 ## License
 

@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com> <www.ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above
@@ -225,7 +225,7 @@ private_handle_init([{Application, _Description, _Vsn} | T],
 				configs = [{Application, Config} | Configs]
 			});
 		_ ->
-			%% Skip unconfigured applications
+			%% Skip applications not configured
 			private_handle_init(T, State)
 	end;
 private_handle_init([], State) ->
@@ -255,23 +255,13 @@ private_handle_config_delete(Application, State = #t__srv_state{
 		#t__config{
 			repositories = Repositories
 		} ->
-			private_handle_config_delete_repositories(Repositories, Application),
+			private_delete_repositories(Application, Repositories),
 			NewConfigs = proplists:delete(Application, Configs),
 			application:unset_env(Application, t__),
 			{ok, private_state_on_change(State#t__srv_state{configs = NewConfigs})};
 		_ ->
 			{{error, not_found}, State}
 	end.
-
-private_handle_config_delete_repositories([#t__repository{name=RepositoryName}|T], Application) ->
-	TableMsgs = t__utils:ets_table_msgs(Application, RepositoryName),
-	TableHeaders = t__utils:ets_table_headers(Application, RepositoryName),
-	TablePot = t__utils:ets_table_pot(Application, RepositoryName),
-	t__utils:ets_table_delete(TableMsgs),
-	t__utils:ets_table_delete(TableHeaders),
-	t__utils:ets_table_delete(TablePot),
-	private_handle_config_delete_repositories([T], Application);
-private_handle_config_delete_repositories([], _Application) -> ok.
 
 %%=============================================================
 %% private_handle_monitor
@@ -383,15 +373,10 @@ private_state_on_change_dev_count([], Acum) -> Acum.
 %%=============================================================
 
 %% @doc Delete the specified application repositories
-private_delete_repositories(Application, [H|T]) ->
-	private_delete_repository(Application, H),
+private_delete_repositories(Application, [#t__repository{name=RepositoryName}|T]) ->
+	RepositoryEtsTable = t__repository:ets_table(Application, RepositoryName),
+	try ets:delete(RepositoryEtsTable)
+		catch _Exception:_Reason -> false
+	end,
 	private_delete_repositories(Application, T);
 private_delete_repositories(_Application, []) -> ok.
-
-%% @doc Delete the specified repository
-private_delete_repository(Application, #t__repository{name = Name}) ->
-	Table = t__utils:ets_table_msgs(Application, Name),
-	t__utils:ets_table_delete(Table).
-
-
-

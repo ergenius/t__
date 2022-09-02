@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com> <www.ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above
@@ -19,6 +19,11 @@
 
 -export([select/3]).
 
+-spec select(Language, N, Msg) -> MsgN when
+    Language :: string(),
+    N :: integer(),
+    Msg :: list(),
+    MsgN :: string().
 %% @doc Select and return the proper translation based on N and plural-forms
 %% If the proper translation can not be determined, the method returns first element of Msg parameter.
 select(Language, N, Msg) ->

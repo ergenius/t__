@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above
@@ -27,6 +27,12 @@
 
 	translate/1, translate/2, translate/3, translate/7
 ]).
+
+-export_type([repository/0, config/0, p/0]).
+
+-type repository() :: #t__repository{}.
+-type config() :: #t__config{}.
+-type p() :: #t__p{}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% application/language
@@ -74,7 +80,7 @@ language() ->
 %%-------------------------------------------------------------
 
 -spec config_get() -> Config when
-	Config :: string().
+	Config :: t__:config().
 %% @doc Returns the current configuration for the calling process.
 %% 
 %% Please notice that the language config record field may not be the same
@@ -103,7 +109,7 @@ config_get() ->
 
 -spec config_get(Application) -> Config when
 	Application :: atom(),
-	Config :: string().
+	Config :: t__:config().
 %% @doc Returns the current configuration for the specified application.
 %%
 %% The function will perform the following steps:
@@ -137,7 +143,7 @@ config_get_environment(Application) ->
 %%-------------------------------------------------------------
 
 -spec config_set(Config) -> ok | {error, Error} when
-	Config :: t__config(),
+	Config :: t__:config(),
 	Error :: term().
 %% @doc Sets a new configuration for the calling process application with infinity timeout.
 %% @see t__:config_set/3
@@ -145,7 +151,7 @@ config_set(Config) -> config_set(application(), Config, infinity).
 
 -spec config_set(Application, Config) -> ok | {error, Error} when
 	Application :: atom(),
-	Config :: t__config(),
+	Config :: t__:config(),
 	Error :: term().
 %% @doc Sets a new configuration for the specified application with infinity timeout.
 %% @see t__:config_set/3
@@ -153,7 +159,7 @@ config_set(Application, Config) -> config_set(Application, Config, infinity).
 
 -spec config_set(Application, Config, Timeout) -> ok | {error, Error} when
 	Application :: atom(),
-	Config :: t__config(),
+	Config :: t__:config(),
 	Timeout :: timeout(),
 	Error :: term().
 %% @doc Sets a new configuration for the specified application with the specified timeout.
@@ -169,7 +175,7 @@ config_set(Application, Config = #t__config{}, Timeout) -> t__srv:config_set_cal
 
 -spec config_set_cast(Application, Config) -> ok | {error, Error} when
 	Application :: atom(),
-	Config :: t__config(),
+	Config :: t__:config(),
 	Error :: term().
 %% @doc Sets a new configuration for the specified application asynchronous
 %% Sends an asynchronous request to the process handling the implementation 
@@ -228,7 +234,7 @@ config_delete_cast(Application) -> t__srv:config_delete_cast(Application).
 	Msg :: string().
 %% @doc Translate a singular or plural term, with or without repository, language and context
 %% This is the main translate function that does everything.
-%% using #t__p
+% using #t__p
 translate(#t__p{
 	application = Application,
 	repository = Repository,
@@ -254,10 +260,14 @@ translate(#t__p{
 				   undefined -> undefined;
 				   _ -> translate_param_cast_term(Context)
 			   end,
+	Reference1 = case Reference of
+				   undefined -> undefined;
+				   _ -> translate_param_cast_term(Context)
+			   end,
 	Msg1 = translate_param_cast_msg(Msg),
 	true = ((Data =:= undefined) or erlang:is_list(Data)),
-	true = ((Reference =:= undefined) or erlang:is_list(Reference)),
-	translate_private(Application1, Repository1, Language1, Context1, Msg1, Data, Reference);
+	Config = config_get(Application1),
+	translate_private(Application1, Config, Repository1, Language1, Context1, Msg1, Data, Reference1);
 translate(P) -> translate(P, undefined, undefined).
 
 -spec translate(Param, Data) -> Msg when
@@ -274,19 +284,19 @@ translate(P, Data) -> translate(P, Data, undefined).
 	Reference :: undefined | string(),
 	Msg :: string().
 %% @doc Translate with data and reference as separate parameters
-%% using #t__p
+% using #t__p
 translate(P = #t__p{}, Data, Reference) ->
 	translate(P#t__p{data = Data, reference = Reference});
-%% With proplist
+% With proplist
 translate(P = [{_K, _V} | _T], Data, Reference) ->
 	translate(translate_param_proplists_to_p(P, Data, Reference));
-%% With repository and term
+% With repository and term
 translate({Repository, {Term}}, Data, Reference) ->
 	translate(translate_param_term_to_p(Term, Repository, undefined, Data, Reference));
-%% With repository, language and term
+% With repository, language and term
 translate({Repository, Language, {Term}}, Data, Reference) ->
 	translate(translate_param_term_to_p(Term, Repository, Language, Data, Reference));
-%% Without repository and language
+% Without repository and language
 translate(Term, Data, Reference) ->
 	translate(translate_param_term_to_p(Term, undefined, undefined, Data, Reference)).
 
@@ -335,22 +345,21 @@ translate_param_proplists_to_p(P, Data, Reference) ->
 %% translate_param_term_to_p
 %%-------------------------------------------------------------
 
-% -spec translate_param_term_to_p(Term, Repository, Language, Data, Reference) -> t__p() when 
-%     Repository :: undefined | string() | binary() | atom(),
-%     Language :: undefined | string() | binary() | atom(),
-%     Data :: undefined | [term()],
-%     Reference :: undefined | string() | binary() | atom(),
-%     Term :: string() | binary() | atom(),
-
 %% @doc Convert term to #t__p{}
 %% Singular terms:
+%% ```
 %% "I have a joke about Erlang, but it requires a prologue."
 %% <<"Erlang is user-friendly, it’s just picky about its friends!">>
 %% 'Why can't you trust atoms? Because they make up everything!'
+%% '''
 %% Plural terms:
-%% ["user", "users"]
+%% ```
+%% %% ["user", "users"]
+%% '''
 %% Plural terms with interpolation:
+%% ```
 %% ["~B user", "~B users"]
+%% '''
 translate_param_term_to_p(Msg, Repository, Language, Data, Reference) when
 	erlang:is_list(Msg); erlang:is_binary(Msg); erlang:is_atom(Msg) -> #t__p{
 	repository = Repository,
@@ -359,13 +368,13 @@ translate_param_term_to_p(Msg, Repository, Language, Data, Reference) when
 	data = Data,
 	reference = Reference};
 %% Singular with context:
-%% {"menu", "Save"}
+%% ```{"menu", "Save"}'''
 %% Plural terms with context:
-%% {"female", ["File belongs to her", "Files belong to her"]}
-%% {"male", ["File belongs to him", "Files belong to him"]}
+%% ```{"female", ["File belongs to her", "Files belong to her"]}'''
+%% ```{"male", ["File belongs to him", "Files belong to him"]}'''
 %% Plural terms with context and interpolation:
-%% {"female", ["~B file belongs to her", "~B files belong to her"]}
-%% {"male", ["~B file belongs to him", "~B files belong to him"]}
+%% ```{"female", ["~B file belongs to her", "~B files belong to her"]}'''
+%% ```{"male", ["~B file belongs to him", "~B files belong to him"]}'''
 translate_param_term_to_p({Context, Msg}, Repository, Language, Data, Reference) ->
 	#t__p{
 		repository = Repository,
@@ -379,25 +388,31 @@ translate_param_term_to_p({Context, Msg}, Repository, Language, Data, Reference)
 %% translate_param_cast_term
 %%-------------------------------------------------------------
 
-%% @doc Convert string, atom, binary to string
-translate_param_cast_term(Term) when is_list(Term) ->
+%% @doc Convert non-empty string, atom, binary to string
+translate_param_cast_term(Term) when is_list(Term), erlang:length(Term) > 0 ->
 	true = io_lib:char_list(Term),
 	Term;
 translate_param_cast_term(Term) when is_binary(Term) ->
 	case unicode:characters_to_list(Term) of
-		L when is_list(L) -> translate_param_cast_term(L); %% Unicode
-		_ -> erlang:binary_to_list(Term) %% bytewise encoded
+		L when is_list(L) ->
+			translate_param_cast_term(L); %% Unicode
+		_ ->
+			translate_param_cast_term(erlang:binary_to_list(Term)) %% bytewise encoded
 	end;
-translate_param_cast_term(Term) when is_atom(Term) -> erlang:atom_to_list(Term).
+translate_param_cast_term(Term) when is_atom(Term) ->
+	translate_param_cast_term(erlang:atom_to_list(Term)).
 
 %%-------------------------------------------------------------
 %% translate_param_cast_msg
 %%-------------------------------------------------------------
 
 %% @doc Convert list of strings, atoms, binaries to list of strings
-translate_param_cast_msg([Msg1]) when erlang:is_list(Msg1); erlang:is_binary(Msg1); erlang:is_atom(Msg1)
+translate_param_cast_msg([Msg1]) when
+	erlang:is_list(Msg1); erlang:is_binary(Msg1); erlang:is_atom(Msg1)
 	-> [translate_param_cast_term(Msg1)];
-translate_param_cast_msg([Msg1, Msg2]) when erlang:is_list(Msg1); erlang:is_binary(Msg1); erlang:is_atom(Msg1)
+translate_param_cast_msg([Msg1, Msg2]) when
+	(erlang:is_list(Msg1) or erlang:is_binary(Msg1) or erlang:is_atom(Msg1));
+	(erlang:is_list(Msg2) or erlang:is_binary(Msg2) or erlang:is_atom(Msg2))
 	-> [translate_param_cast_term(Msg1), translate_param_cast_term(Msg2)];
 translate_param_cast_msg(M) when erlang:is_list(M) -> [M];
 translate_param_cast_msg(M) when erlang:is_binary(M) ->
@@ -411,44 +426,16 @@ translate_param_cast_msg(M) when erlang:is_atom(M) -> [erlang:atom_to_list(M)].
 %% translate_private
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% @doc Private translate function that expects proper parameters
-%% handle singular messages
-translate_private(Application, Repository, Language, Context, Msg, Data, Reference) ->
-
-	TableMsgs = t__utils:ets_table_msgs(Application, Repository),
-	Key = {Language, {Context, Msg}},
+%% @doc Private translate function
+translate_private(Application, #t__config{dev=Dev}, Repository, Language, Context, Msg, Data, Reference) ->
+	EtsTableRepository = t__repository:ets_table(Application, Repository),
 	try
-		case ets:lookup(TableMsgs, Key) of
-			[] ->
-				TablePot = t__utils:ets_table_pot(Application, Repository),
-				try
-					ets:insert(TablePot, {Key, Msg, Reference}),
-					translate_private_sp_missing(Msg, Data, Application, Repository, Language)
-				catch
-					Exception:Reason ->
-						?T__LOG(error, "ets:insert Exception!",
-							[
-								{exception, {Exception, Reason}},
-								{table_pot, TablePot},
-								{application, Application},
-								{repository, Repository},
-								{language, Language},
-								{context, Context},
-								{msg, Msg},
-								{data, Data},
-								{reference, Reference}
-							]),
-						translate_private_sp_missing(Msg, Data, Application, Repository, Language)
-				end;
-			[{_Key, Value}] ->
-				translate_private_sp(Value, Data, Application, Repository, Language)
-		end
+		translate_private(Dev, EtsTableRepository, Language, Context, Msg, Data, Reference)
 	catch
 		Exception1:Reason1 ->
-			?T__LOG(error, "ets:lookup Exception!",
+			?T__LOG(error, "Translate exception!",
 				[
 					{exception, {Exception1, Reason1}},
-					{table_msg, TableMsgs},
 					{application, Application},
 					{repository, Repository},
 					{language, Language},
@@ -457,25 +444,50 @@ translate_private(Application, Repository, Language, Context, Msg, Data, Referen
 					{data, Data},
 					{reference, Reference}
 				]),
-			translate_private_sp_missing(Msg, Data, Application, Repository, Language)
+			translate_private_sp_missing(Msg, Data, Language)
+	end.
+
+%% @doc Private translate function for production mode/developer mode
+% Production mode
+translate_private(false, EtsTable, Language, Context, Msg, Data, _Reference) ->
+	Key = {po, Language, Context, Msg},
+	case ets:lookup(EtsTable, Key) of
+		[{_Key, {_Comments, Value}}] ->
+			translate_private_sp(Value, Data, Language);
+		_ ->
+			translate_private_sp_missing(Msg, Data, Language)
+	end;
+% developer mode
+translate_private(true, EtsTable, Language, Context, Msg, Data, Reference) ->
+	PotKey = {pot, Context, Msg},
+	case ets:lookup(EtsTable, PotKey) of
+		[] -> ets:insert(EtsTable, {PotKey, [Reference]});
+		_ -> ok
+	end,
+	Key = {po, Language, Context, Msg},
+	case ets:lookup(EtsTable, Key) of
+		[{_Key, {_Comments, Value}}] ->
+			translate_private_sp(Value, Data, Language);
+		_ ->
+			translate_private_sp_missing(Msg, Data, Language)
 	end.
 
 %% @doc Detect and translate single or plural terms when the translation is missing
 %% Single terms
-translate_private_sp_missing([Msg], Data, _Application, _Repository, _Language) ->
+translate_private_sp_missing([Msg], Data, _Language) ->
 	translate_private_format(Msg, Data);
 %% Plural terms
-translate_private_sp_missing([M1|_T], Data = [N | _], _Application, _Repository, _Language) when N == 1 ->
+translate_private_sp_missing([M1|_T], Data = [N | _], _Language) when N == 1 ->
 	translate_private_format(M1, Data);
-translate_private_sp_missing([_M1,M2|_T], Data, _Application, _Repository, _Language) ->
+translate_private_sp_missing([_M1,M2|_T], Data, _Language) ->
 	translate_private_format(M2, Data).
 
 %% @doc Detect and translate single or plural terms
 %% Single terms
-translate_private_sp([Msg], Data, _Application, _Repository, _Language) ->
+translate_private_sp([Msg], Data, _Language) ->
 	translate_private_format(Msg, Data);
 %% Plural terms
-translate_private_sp(Msg, Data = [N | _], _Application, _Repository, Language) ->
+translate_private_sp(Msg, Data = [N | _], Language) ->
 	SelectedMsg = t__plural:select(Language, N, Msg),
 	translate_private_format(SelectedMsg, Data).
 

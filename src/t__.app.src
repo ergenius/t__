@@ -1,5 +1,5 @@
 {application, t__,
- [{description, "Erlang gettext Translation"},
+ [{description, "Erlang gettext application"},
   {vsn, "0.1.0"},
   {registered, []},
   {applications, [kernel, stdlib, sasl]},
