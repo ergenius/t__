@@ -1279,8 +1279,8 @@
 -spec get_specs(Language) -> Specs when
 	Language :: term(),
 	Specs :: undefined | proplists:proplist().
-%% @doc Select and return the proper translation based on N and plural-forms
-%% If the proper translation can not be determined, the method returns first element of Msg parameter.
+%% @doc Select and return a proplist containing language specifications.
+%% If the language is not in our database, returns undefined.
 get_specs(Language) ->
 	case is_gettext_language(Language) of
 		true ->

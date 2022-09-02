@@ -1,5 +1,5 @@
 %% -*- coding: utf-8 -*-
-%% Copyright (c) 2022, Madalin Grigore-Enescu <github@ergenius.com>
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
 %%
 %% Permission to use, copy, modify, and/or distribute this software for any
 %% purpose with or without fee is hereby granted, provided that the above

@@ -5,11 +5,10 @@
   {applications, [kernel, stdlib, sasl]},
   {mod, {t___app, []}},
   {env,[]},
-  {modules, [
-   t__sup,
-   t__srv
-  ]},
-  {maintainers, ["Madalin Grigore-Enescu <github@ergenius.com>"]},
+  {modules, []},
+  {maintainers, ["Madalin Grigore-Enescu <https://github.com/ergenius>"]},
   {licenses, ["MIT"]},
-  {links, [{"Github", "https://github.com/ergenius/t__"}]}
+  {links, [{"Github", "https://github.com/ergenius/t__"}]},
+  {files, ["CHANGELOG.md", "LICENSE", "Makefile", "README.md", "rebar.config", "doc", "repositories", "include", "src", "test"]},
+  {exclude_paths, ["rebar.lock", "t__.iml"]}
  ]}.

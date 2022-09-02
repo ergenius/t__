@@ -1,7 +1,17 @@
-%%%-------------------------------------------------------------------
-%% @doc testapp public API
-%% @end
-%%%-------------------------------------------------------------------
+%% -*- coding: utf-8 -*-
+%% Copyright (c) 2022, Madalin Grigore-Enescu <https://github.com/ergenius> <https://ergenius.com>
+%%
+%% Permission to use, copy, modify, and/or distribute this software for any
+%% purpose with or without fee is hereby granted, provided that the above
+%% copyright notice and this permission notice appear in all copies.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+%% WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+%% MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+%% ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+%% WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+%% ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+%% OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 -module(demoapp_app).
 
@@ -35,8 +45,8 @@ start(_StartType, _StartArgs) ->
             #t__repository{
                 name = "default",
                 directory = filename:join([
-                    filename:dirname(filename:dirname(filename:dirname(code:which(?MODULE)))),
-                    "repositories/default"])
+                    filename:dirname(filename:dirname(code:which(?MODULE))),
+                    "priv/repositories/default"])
             },
             %% This is an invalid repository demonstrating how resilient t__ is.
             %% This is a nice feature for development phase.
@@ -46,7 +56,7 @@ start(_StartType, _StartArgs) ->
             %% and the repository will be available to use.
             #t__repository{
                 name = "invalid",
-                directory = "/home/madalin/invalid-repository-that-does-not-exist-48945700dbguasczx"
+                directory = filename:join(["~/invalid-repository-that-does-not-exist"])
             }
         ]
     }),

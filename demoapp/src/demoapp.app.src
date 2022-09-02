@@ -11,6 +11,7 @@
    ]},
   {env,[]},
   {modules, []},
+  {maintainers, ["Madalin Grigore-Enescu <https://github.com/ergenius>"]},
   {licenses, ["MIT"]},
-  {links, []}
+  {links, [{"Github", "https://github.com/ergenius/t__"}]}
  ]}.
