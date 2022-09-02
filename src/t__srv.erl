@@ -316,7 +316,7 @@ private_update_application(ApplicationName, Config = #t__config{
 	}.
 
 %% @doc Update the specified application
-private_update_application(ApplicationName, [Repository = #t__repository{name = RepositoryName}|T], Acum) ->
+private_update_application(ApplicationName, [Repository = #t__repository{}|T], Acum) ->
 	case t__repository:update(ApplicationName, Repository) of
 		{ok, NewRepository} -> private_update_application(ApplicationName, T, [NewRepository|Acum]);
 		Error ->
@@ -324,7 +324,7 @@ private_update_application(ApplicationName, [Repository = #t__repository{name = 
 			" Repository directory does not exist or it is not accesible.",
 				[
 					{application, ApplicationName},
-					{repository, RepositoryName},
+					{repository, Repository},
 					{error, Error}
 				]),
 			%% We are facing 3 choices here:
