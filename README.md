@@ -1,7 +1,9 @@
 # t__
 Erlang gettext
 
-Short story this library offers almost the same functionalities as [elixir-gettext](https://github.com/elixir-gettext/gettext) does but in a pure Erlang implementation.
+t__ is an implementation of the Gettext system in Erlang. 
+
+gettext is an internationalization and localization system commonly used for writing multilingual programs on Unix-like computer operating systems. 
 
 [![Erlang CI](https://github.com/ergenius/t__/actions/workflows/erlang.yml/badge.svg)](https://github.com/ergenius/t__/actions/workflows/erlang.yml)
 
