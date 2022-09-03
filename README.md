@@ -5,7 +5,7 @@ Short story this library offers almost the same functionalities as [elixir-gette
 
 [![Erlang CI](https://github.com/ergenius/t__/actions/workflows/erlang.yml/badge.svg)](https://github.com/ergenius/t__/actions/workflows/erlang.yml)
 
-t__ is also available on [HEX](https://hex.pm/packages/t__).
+t__ is also available on HEX: https://hex.pm/packages/t__
 
 ## Features
 - ?T__("I have a joke about Erlang, but it requires a prologue.")
