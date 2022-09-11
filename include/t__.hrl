@@ -17,7 +17,7 @@
 %% Default language code string.
 %% 
 %% Don't edit this! Overwrite it using the following ways:
-%% - call TL__("language_code") in your process to setup the language per process. Best performance/higly recommended.
+%% - call TL__("language_code") in your process to setup the language per process. Best performance/highly recommended.
 %% - call t__:config/1 or t__:config/2 to configure the language at the application level
 %% - set the t__config environment variable for your application
 %% - set the t__config environment variable for the t__ application. NOT recommended because 
@@ -85,7 +85,7 @@
 	%%
 	%% When in developer mode the t__srv monitor monitor PO file changes and
 	%% collect all untranslated strings. The repository PO files translations
-	%% are still cached into an ETS table but the cache is evicted everytime the PO
+	%% are still cached into an ETS table but the cache is evicted every time the PO
 	%% files are modified.
 	%%
 	%% If dev mode is false, no untranslated strings are collected.
@@ -134,7 +134,7 @@
 	%%
 	%% It should contain a reference to the program’s source code related to the msgid
 	%% you want to translate. This information can be used by the translator to
-	%% locate and understand the context from where the message is comming.
+	%% locate and understand the context from where the message is coming.
 	%% If you use the T__ macro this information is automatically set using
 	%% ?FILE:?LINE ?MODULE:?FUNCTION_NAME/?FUNCTION_ARITY format.
 	reference = undefined :: undefined | string()
@@ -166,12 +166,12 @@
 -define(T__LANGUAGE(Language), erlang:put(t__language, Language)).
 
 %% Macro for creating a gettext reference
-%% Refrence information is added as a comment line starting with #: 
+%% Reference information is added as a comment line starting with #: 
 %% into the generated POT file above the msgid.
 %%
 %% It should contain a reference to the program’s source code related to the msgid 
 %% you want to translate. This information can be used by the translator to
-%% locate and understand the context from where the message is comming.
+%% locate and understand the context from where the message is coming.
 %% If you use the T__ macro this information is automatically collected using 
 %% ?FILE:?LINE ?MODULE:?FUNCTION_NAME/?FUNCTION_ARITY format
 -define(T__REFERENCE(), io_lib:format("~p:~p - ~p:~p/~p", [?FILE, ?LINE, ?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY])).

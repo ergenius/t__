@@ -248,7 +248,7 @@ terminate(_Reason, _State) -> ok.
 
 %% @doc Handle gen_server code change
 %% This function is called by a gen_server process when it is to update its internal state during a release upgrade/downgrade,
-%% that is, when the instruction {update,Module,Change,...}, where Change={advanced,Extra}, is specifed in the appup file.
+%% that is, when the instruction {update,Module,Change,...}, where Change={advanced,Extra}, is specified in the appup file.
 %% For more information, see section Release Handling Instructions in OTP Design Principles.
 %%
 %% For an upgrade, OldVsn is Vsn, and for a downgrade, OldVsn is {down,Vsn}. Vsn is defined by the vsn attribute(s) of the old version
