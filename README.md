@@ -34,13 +34,13 @@ t__ is also available on [HEX](https://hex.pm/packages/t&lowbar;&lowbar;/)
 | 2   | gettext contexts                                                      | YES                                                   | NO                                                      |
 | 3   | gettext plural terms                                                  | YES                                                   | NO                                                      |
 | 4   | Separate configurations for each application started at the same node | YES                                                   | NO                                                      |
-| 5   | Diffrent language sources                                             | YES: using application 'repositories'                 | YES: using diffrent languages servers                   |
+| 5   | Different language sources                                             | YES: using application 'repositories'                 | YES: using different languages servers                   |
 | 6   | Developer mode/monitoring PO file changes                             | YES: automatically detecting PO changes               | NO: requires manual reloading of the PO files           |
 | 7   | Cache                                                                 | YES: ETS reads/writes on the calling process (faster) | YES: ETS reads/writes inside the translation gen_server |
 
 ## Limitations
 
-- Gettext plural-forms formulas are hardcoded using a database. Work is underway to bypass this limitation and provide a full interpretor of any arbitrary gettext C formula.
+- Gettext plural-forms formulas are hardcoded using a database. Work is underway to bypass this limitation and provide a full interpreter of any arbitrary gettext C formula.
 
 ## Documentation
 
@@ -59,7 +59,7 @@ You can test this feature by modifying any PO files used by the demoapp while yo
 
 #### Set the language
 
-It is higly recommended to set the calling process language in order to avoid specifying the language for each ?T__ macro call.
+It is highly recommended to set the calling process language in order to avoid specifying the language for each ?T__ macro call.
 The specified language will be used by all ?T__ macros and functions for the current process if no explicit language is specified as a macro or function parameter.
 
 ```erlang
@@ -80,7 +80,7 @@ The function will perform the following steps in order to determine the default 
 - call application:get_env(t__language)
 - call application:get_env(t__, t__language)
 - if no t__language environment key was set for both the current application or the t__ application
-we return t__ default language defined in t__.hrl file (wich is "en").
+we return t__ default language defined in t__.hrl file (which is "en").
 
 ```erlang
 Language = ?T__LANGUAGE().
@@ -200,7 +200,7 @@ Short answer: Yes, if you trust CLDR Project.
 
 ### How plural formulas where generated from CLDR?
 
-For mantaining plural formulas database we started another project here: [gettext-po-samples](https://github.com/ergenius/gettext-po-samples)
+For maintaining plural formulas database we started another project here: [gettext-po-samples](https://github.com/ergenius/gettext-po-samples)
 
 We use the following sources and tools for compiling the database:
 
