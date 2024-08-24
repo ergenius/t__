@@ -219,15 +219,16 @@ The same [plural-forms.eterm](https://github.com/ergenius/gettext-po-samples/blo
 
 ## Erlang versions supported
 
-t__ officially supports OTP release 20 and later.
+t__ officially supports OTP release 21 and later.
 
-Development takes place using OTP 25 release and tests are done on:
-- 25.0.3
+Development takes place using OTP 27 release and tests are done on:
+- 27.0.1
+- 26.2.5
+- 25.3.2
 - 24.3.4
 - 23.3.4
 - 22.3.4
 - 21.3.8
-- 20.3.8
 
 Unofficially, you may be able to use t__ with older Erlang versions. No guarantee included.
 
